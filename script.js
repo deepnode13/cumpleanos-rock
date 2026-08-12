@@ -18,26 +18,30 @@ document.addEventListener('DOMContentLoaded', () => {
     pantallaInicio.classList.add('oculto');
 
     // 2. Intentar reproducir audio y obtener duración real
+    // Importante: El archivo debe estar en audio/happyrock.mp3
     musica.play().then(() => {
       if (musica.duration && !isNaN(musica.duration)) {
         duracionCancion = musica.duration;
       }
+      console.log("Audio reproduciéndose. Duración:", duracionCancion);
     }).catch(err => {
-      console.warn("No se pudo reproducir el audio. Usando tiempo estimado.", err);
+      console.warn("No se pudo reproducir el audio automáticamente. Usando tiempo estimado. Revisa la ruta audio/happyrock.mp3", err);
+      // Fallback: Si no hay audio, la animación dura 95s igual.
     });
 
-    // 3. Activar estado de movimiento e iniciar la carrera
+    // 3. Activar estado de movimiento visual de la pista y corredora
     pista.classList.add('movimiento');
     corredora.classList.add('animar');
-    cartelGradas.style.display = 'block';
+    // El cartel ya es visible por defecto en el HTML modificado
 
     const tiempoInicio = Date.now();
 
     // Tiempo total de carrera activa = Duración total de la canción menos 10 segundos
-    const tiempoMeta = Math.max(duracionCancion - 10, 5);
+    const tiempoMeta = Math.max(duracionCancion - 10, 5); // Fallback minimo 5s
 
     const intervalo = setInterval(() => {
       const tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000;
+      // Progreso basado en el tiempo total de carrera (hasta T-10s)
       const progreso = Math.min(tiempoTranscurrido / tiempoMeta, 1);
 
       // Avance progresivo de la corredora a lo largo de la pista (de 5% a 70%)
@@ -47,62 +51,73 @@ document.addEventListener('DOMContentLoaded', () => {
       // DISPARO DE EVENTOS EXACTAMENTE 10 SEGUNDOS ANTES DEL FINAL DE LA CANCIÓN
       if (tiempoTranscurrido >= tiempoMeta && !eventoFinalEjecutado) {
         eventoFinalEjecutado = true;
-        clearInterval(intervalo);
+        clearInterval(intervalo); // Detiene el bucle de movimiento horizontal
 
-        // A. Detener animación de carrera de la corredora
+        console.log("Hito T-10s alcanzado. Iniciando final.");
+
+        // A. Detener animación física de carrera (piernas/brazos) y movimiento de pista
         pista.classList.remove('movimiento');
         corredora.classList.remove('animar');
-        corredora.style.left = '70%';
+        corredora.style.left = '70%'; // Asegura posición final frente a la meta
 
-        // B. Mostrar la meta y ocultar el cartel de gradas
+        // B. Mostrar el arco de meta y ocultar el cartel de felicitación de gradas
         meta.classList.remove('oculto');
-        cartelGradas.style.display = 'none';
+        if(cartelGradas) cartelGradas.style.display = 'none';
 
-        // C. Activar show de fuego y luces de concierto
-        fuegoEscenario.classList.remove('oculto');
-        lucesEscenario.classList.add('fiesta-rock');
+        // C. Activar show de fuegos y luces intensas de concierto
+        if(fuegoEscenario) fuegoEscenario.classList.remove('oculto');
+        if(lucesEscenario) lucesEscenario.classList.add('fiesta-rock');
 
-        // D. Mostrar cartel final de "Felices 16 años" en Alemán
-        mensajeFinal.classList.remove('oculto');
-
-        // E. Lanza explosión de confeti en toda la pantalla
+        // D. Lanza explosión masiva de confeti en toda la pantalla
         lanzarGranConfetiRock();
+
+        // E. Mostrar cartel emergente final modal "Felices 16 años" en Alemán
+        // Pequeño delay para que se vea la explosión primero
+        setTimeout(() => {
+            if(mensajeFinal) mensajeFinal.classList.remove('oculto');
+        }, 500);
       }
-    }, 100);
+    }, 100); // Chequeo cada 100ms para precisión
   });
 
   // Función de explosión masiva de confeti con Canvas-Confetti
   function lanzarGranConfetiRock() {
-    if (typeof confetti !== 'function') return;
+    if (typeof confetti !== 'function') {
+        console.error("La librería canvas-confetti no está cargada.");
+        return;
+    }
 
-    const duracionConfeti = 4000;
+    const duracionConfeti = 4000; // 4 segundos de ráfagas
     const fin = Date.now() + duracionConfeti;
 
-    // Disparo inicial fuerte en el centro
+    // 1. Explosión inicial fuerte central
     confetti({
-      particleCount: 120,
+      particleCount: 150,
       spread: 100,
-      origin: { y: 0.6 },
-      colors: ['#ff0055', '#ffcc00', '#00d4ff', '#ffffff']
+      origin: { y: 0.7 }, // Cerca de la pista
+      colors: ['#ff0055', '#ffcc00', '#00d4ff', '#ffffff', '#ff6600']
     });
 
-    // Ráfagas continuas en ambos lados del escenario
+    // 2. Ráfagas continuas tipo cañón desde los lados del escenario
     (function marcoConfeti() {
+      // Cañón Izquierdo
       confetti({
-        particleCount: 7,
+        particleCount: 8,
         angle: 60,
         spread: 55,
-        origin: { x: 0 },
+        origin: { x: 0, y: 0.8 },
         colors: ['#ff0055', '#ffcc00', '#ffffff']
       });
+      // Cañón Derecho
       confetti({
-        particleCount: 7,
+        particleCount: 8,
         angle: 120,
         spread: 55,
-        origin: { x: 1 },
+        origin: { x: 1, y: 0.8 },
         colors: ['#00d4ff', '#ff0055', '#ffffff']
       });
 
+      // Continuar mientras no pase el tiempo definido
       if (Date.now() < fin) {
         requestAnimationFrame(marcoConfeti);
       }
