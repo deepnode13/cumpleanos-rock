@@ -76,25 +76,44 @@ body, html {
   box-shadow: 0 8px 25px rgba(255, 0, 85, 0.7);
 }
 
-/* Contenedor Adaptable */
+/* Contenedor Principal Adaptable */
 .estadio-contenedor {
   position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  background: linear-gradient(to bottom, #05050a 0%, #1a0a2a 60%, #110515 100%);
+  /* Mantiene las gradas arriba y la pista abajo */
+  justify-content: flex-end; 
+  background: #05050a;
   overflow: hidden;
 }
 
-/* Show de Luces Concierto */
+/* === SECCIÓN GRADAS (MODIFICADA PARA ABARCAR CASI TODO) === */
+.gradas-contenedor {
+  position: relative;
+  width: 100%;
+  /* Flex-grow hace que ocupe todo el espacio disponible arriba de la pista */
+  flex-grow: 1; 
+  background: linear-gradient(to bottom, #11111a 0%, #1a1a2a 80%, #11111a 100%);
+  border-bottom: 4px solid #ff0055;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centra el cartel y el público verticalmente en el gran espacio */
+  justify-content: center; 
+  padding: 20px 0;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* Show de Luces Concierto (Movido dentro de las gradas) */
 .luces-escenario {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 50%;
+  height: 100%;
   pointer-events: none;
   z-index: 2;
 }
@@ -102,22 +121,22 @@ body, html {
 .luz {
   position: absolute;
   top: -20px;
-  width: 120px;
-  height: 350px;
+  width: 15vw;
+  height: 100%;
   opacity: 0.15;
-  filter: blur(20px);
+  filter: blur(25px);
   transform-origin: top center;
   transition: opacity 0.5s;
 }
 
 .luz-izq {
-  left: 15%;
+  left: 10%;
   background: linear-gradient(to bottom, #ff0055, transparent);
   animation: barridoIzq 3s infinite alternate ease-in-out;
 }
 
 .luz-der {
-  right: 15%;
+  right: 10%;
   background: linear-gradient(to bottom, #00d4ff, transparent);
   animation: barridoDer 3.5s infinite alternate ease-in-out;
 }
@@ -131,97 +150,92 @@ body, html {
 
 /* Modo Fiesta Concierto (Activo al final) */
 .luces-escenario.fiesta-rock .luz {
-  opacity: 0.6;
+  opacity: 0.7;
   animation-duration: 0.6s !important;
 }
 
 @keyframes barridoIzq {
-  from { transform: rotate(-25deg); }
-  to { transform: rotate(15deg); }
+  from { transform: rotate(-20deg); }
+  to { transform: rotate(10deg); }
 }
 
 @keyframes barridoDer {
-  from { transform: rotate(25deg); }
-  to { transform: rotate(-15deg); }
+  from { transform: rotate(20deg); }
+  to { transform: rotate(-10deg); }
 }
 
 @keyframes pulsoCentro {
   from { opacity: 0.1; }
-  to { opacity: 0.4; }
+  to { opacity: 0.5; }
 }
 
-/* Flamas de Fuego */
+/* Flamas de Fuego (Ajustado posición relativa a las gradas grandes) */
 .fuego-escenario {
   position: absolute;
-  bottom: 35%;
+  bottom: 10px; /* Cerca de la pista */
   width: 100%;
   display: flex;
   justify-content: space-around;
-  z-index: 5;
+  z-index: 15;
   pointer-events: none;
 }
 
 .flama {
-  font-size: 2.5rem;
+  font-size: 3rem;
   animation: fuegoSalto 0.4s infinite alternate ease-in-out;
 }
 
 @keyframes fuegoSalto {
   from { transform: translateY(0) scale(0.9); }
-  to { transform: translateY(-15px) scale(1.2); }
+  to { transform: translateY(-20px) scale(1.2); }
 }
 
-/* Gradas y Público */
-.gradas-contenedor {
-  position: relative;
-  width: 100%;
-  background: #11111a;
-  border-bottom: 4px solid #ff0055;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 0 5px 0;
-  z-index: 10;
-}
-
+/* Cartel en Gradas (Más grande y centrado) */
 .cartel-gradas {
-  background: rgba(20, 20, 30, 0.9);
-  border: 2px solid #ffcc00;
-  border-radius: 10px;
-  padding: 6px 16px;
+  position: relative;
+  background: rgba(10, 10, 15, 0.95);
+  border: 3px solid #ffcc00;
+  border-radius: 15px;
+  padding: 15px 30px;
   text-align: center;
-  margin-bottom: 8px;
-  box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+  margin-bottom: 40px; /* Espacio con el público */
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+  z-index: 20;
   animation: letreroGlow 1.5s infinite alternate;
 }
 
 .cartel-gradas h2 {
-  font-size: 1.1rem;
+  font-size: 1.6rem;
   color: #ffcc00;
   letter-spacing: 1px;
 }
 
 .cartel-gradas p {
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   color: #fff;
   font-family: sans-serif;
+  margin-top: 5px;
 }
 
 @keyframes letreroGlow {
-  from { box-shadow: 0 0 10px rgba(255, 204, 0, 0.3); }
-  to { box-shadow: 0 0 20px rgba(255, 0, 85, 0.8); }
+  from { box-shadow: 0 0 15px rgba(255, 204, 0, 0.4); border-color: #ffcc00;}
+  to { box-shadow: 0 0 30px rgba(255, 0, 85, 0.9); border-color: #ff0055;}
 }
 
+/* Tribuna con múltiples filas */
 .tribuna {
   width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 10;
+  padding: 0 10px;
 }
 
-.publico-rock {
+.fila-publico {
   display: flex;
   justify-content: space-around;
-  font-size: 1.5rem;
+  font-size: 2.2rem; /* Emojis más grandes */
 }
 
 .rocker {
@@ -229,45 +243,61 @@ body, html {
   animation: saltoRocker 0.6s infinite alternate ease-in-out;
 }
 
-.r1 { animation-delay: 0.1s; }
-.r2 { animation-delay: 0.3s; }
-.r3 { animation-delay: 0.5s; }
-.r4 { animation-delay: 0.2s; }
-.r5 { animation-delay: 0.4s; }
-.r6 { animation-delay: 0.15s; }
-.r7 { animation-delay: 0.35s; }
-.r8 { animation-delay: 0.25s; }
+/* Variaciones de delay animacion */
+.fila-publico:nth-child(even) .rocker { animation-delay: 0.3s; }
+.rocker:nth-child(3n) { animation-delay: 0.5s; }
 
 @keyframes saltoRocker {
-  from { transform: translateY(0); }
-  to { transform: translateY(-8px); }
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-12px) scale(1.1); }
 }
 
-/* Pista de Atletismo - Posicionamiento Responsivo elevado */
+/* Reflectores estáticos de fondo */
+.reflectores {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+}
+.foco {
+  position: absolute;
+  bottom: 0;
+  width: 50px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  filter: blur(10px);
+}
+.f-izq { left: 5%; }
+.f-der { right: 5%; }
+
+
+/* === SECCIÓN PISTA (AJUSTADA Altura fia inferior) === */
 .pista {
   position: relative;
   width: 100%;
-  height: 22vh;
-  min-height: 140px;
+  /* Altura fija para la pista en la parte inferior */
+  height: 120px; 
   background: #2a2a35;
-  border-top: 3px solid #555;
+  border-top: 4px solid #555;
+  box-shadow: 0 -10px 20px rgba(0,0,0,0.5);
   overflow: hidden;
   z-index: 20;
+  flex-shrink: 0; /* No permite que se encoja */
 }
 
 .linea-carril {
   position: absolute;
   width: 100%;
   height: 2px;
-  border-top: 2px dashed rgba(255, 255, 255, 0.4);
+  border-top: 2px dashed rgba(255, 255, 255, 0.5);
 }
 
-.c1 { top: 33%; }
-.c2 { top: 66%; }
+.c1 { top: 35%; }
+.c2 { top: 70%; }
 
 /* Animación de ilusión de velocidad en la pista */
 .pista.movimiento .linea-carril {
-  animation: moverLinea 0.3s linear infinite;
+  animation: moverLinea 0.2s linear infinite;
 }
 
 @keyframes moverLinea {
@@ -275,13 +305,14 @@ body, html {
   to { background-position-x: -50px; }
 }
 
-/* Corredora */
+/* Corredora - Centrada verticalmente en la pista de 120px */
 .corredora {
   position: absolute;
-  bottom: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   left: 5%;
-  width: 75px;
-  height: 90px;
+  width: 80px;
+  height: 100px;
   z-index: 30;
   transition: left 0.1s linear;
 }
@@ -338,22 +369,23 @@ body, html {
   right: 8%;
   bottom: 0;
   height: 100%;
-  width: 20px;
+  width: 25px;
   background: repeating-linear-gradient(0deg, #fff, #fff 15px, #000 15px, #000 30px);
   z-index: 25;
+  box-shadow: -5px 0 15px rgba(255,255,255,0.3);
 }
 
 .poster-meta {
   position: absolute;
-  top: -35px;
-  left: -25px;
+  top: -40px;
+  left: -30px;
   background: #ff0055;
   color: #fff;
-  padding: 4px 10px;
-  font-size: 0.9rem;
+  padding: 5px 15px;
+  font-size: 1rem;
   border-radius: 5px;
   border: 2px solid #fff;
-  box-shadow: 0 0 10px #ff0055;
+  box-shadow: 0 0 15px #ff0055;
 }
 
 /* Modal Final */
@@ -367,7 +399,7 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 500;
+  z-index: 2000;
   padding: 20px;
   animation: popIn 0.5s ease-out;
 }
@@ -376,35 +408,35 @@ body, html {
   background: linear-gradient(135deg, #1f0826, #0a0a14);
   border: 4px solid #ffcc00;
   border-radius: 25px;
-  padding: 30px 20px;
+  padding: 40px 20px;
   text-align: center;
-  max-width: 450px;
+  max-width: 500px;
   width: 100%;
-  box-shadow: 0 0 40px rgba(255, 204, 0, 0.6);
+  box-shadow: 0 0 50px rgba(255, 204, 0, 0.7);
 }
 
 .icono-corona {
-  font-size: 3.5rem;
-  margin-bottom: 10px;
+  font-size: 4rem;
+  margin-bottom: 15px;
 }
 
 .contenido-modal h2 {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: #ffcc00;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   line-height: 1.2;
   letter-spacing: 1px;
 }
 
 .contenido-modal p {
   font-family: sans-serif;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #fff;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .fuegos-emojis {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
 }
 
 /* Utilidad */
@@ -417,20 +449,45 @@ body, html {
   to { transform: scale(1); opacity: 1; }
 }
 
-/* Adaptabilidad Celular */
-@media (max-width: 600px) {
-  .cartel-gradas h2 {
-    font-size: 0.95rem;
+/* === ADAPTABILIDAD CELULAR (RESPONSIVE) === */
+@media (max-width: 768px) {
+  /* Gradas grandes en movil */
+  .cartel-gradas {
+    padding: 10px 15px;
+    margin-bottom: 20px;
   }
-  .publico-rock {
-    font-size: 1.2rem;
+  .cartel-gradas h2 {
+    font-size: 1rem;
+  }
+  .cartel-gradas p {
+    font-size: 0.8rem;
+  }
+  
+  .fila-publico {
+    font-size: 1.5rem; /* Emojis mas pequeños en movil */
+  }
+  .oculto-movil {
+    display: none; /* Quita filas extras en pantallas muy bajas */
+  }
+
+  .luz {
+    width: 25vw;
+  }
+
+  /* Pista mantiene altura pero ajusta elementos */
+  .pista {
+    height: 100px;
   }
   .corredora {
     width: 60px;
     height: 75px;
-    bottom: 10px;
   }
-  .contenido-modal h2 {
-    font-size: 1.3rem;
+  
+  /* Modal final */
+  .tarjeta-bienvenida h1, .contenido-modal h2 {
+    font-size: 1.4rem;
+  }
+  .icono-rock, .icono-corona {
+    font-size: 2.5rem;
   }
 }
