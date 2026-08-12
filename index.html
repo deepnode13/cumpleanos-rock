@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Rock Run</title>
+  <title>Happy Birthday Rock Run - Massive Stands</title>
   <link rel="stylesheet" href="style.css">
   <!-- Librería Canvas Confetti desde CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -23,23 +23,24 @@
   <!-- Contenedor Principal del Escenario / Estadio -->
   <div class="estadio-contenedor">
 
-    <!-- Efectos de Luces y Fuego de Concierto -->
-    <div id="luces-escenario" class="luces-escenario">
-      <div class="luz luz-izq"></div>
-      <div class="luz luz-der"></div>
-      <div class="luz luz-centro"></div>
-    </div>
-
-    <div id="fuego-escenario" class="fuego-escenario oculto">
-      <div class="flama f1">🔥</div>
-      <div class="flama f2">🔥</div>
-      <div class="flama f3">🔥</div>
-      <div class="flama f4">🔥</div>
-      <div class="flama f5">🔥</div>
-    </div>
-
-    <!-- Gradas y Público Rockero -->
+    <!-- Gradas y Público Rockero (OCUPAN CASI TODA LA PANTALLA) -->
     <div class="gradas-contenedor">
+      
+      <!-- Efectos de Luces y Fuego de Concierto dentro de las gradas -->
+      <div id="luces-escenario" class="luces-escenario">
+        <div class="luz luz-izq"></div>
+        <div class="luz luz-der"></div>
+        <div class="luz luz-centro"></div>
+      </div>
+
+      <div id="fuego-escenario" class="fuego-escenario oculto">
+        <div class="flama f1">🔥</div>
+        <div class="flama f2">🔥</div>
+        <div class="flama f3">🔥</div>
+        <div class="flama f4">🔥</div>
+        <div class="flama f5">🔥</div>
+      </div>
+
       <div class="reflectores">
         <div class="foco f-izq"></div>
         <div class="foco f-der"></div>
@@ -51,26 +52,27 @@
         <p>🏃‍♀️ Lauf weiter! 🏃‍♀️</p>
       </div>
 
-      <!-- Público Rockero -->
+      <!-- Público Rockero (Múltiples filas para llenar el espacio) -->
       <div class="tribuna">
-        <div class="publico-rock">
-          <span class="rocker r1">👨‍🎤</span>
-          <span class="rocker r2">🤘</span>
-          <span class="rocker r3">🎸</span>
-          <span class="rocker r4">👩‍🎤</span>
-          <span class="rocker r5">🔥</span>
-          <span class="rocker r6">⚡</span>
-          <span class="rocker r7">🤘</span>
-          <span class="rocker r8">🎤</span>
-          <span class="rocker r1">👩‍🎤</span>
-          <span class="rocker r3">🤘</span>
-          <span class="rocker r5">🎸</span>
-          <span class="rocker r2">👨‍🎤</span>
+        <div class="fila-publico">
+          <span class="rocker r1">👨‍🎤</span><span class="rocker r2">🤘</span><span class="rocker r3">🎸</span><span class="rocker r4">👩‍🎤</span><span class="rocker r5">🔥</span>
+        </div>
+        <div class="fila-publico">
+          <span class="rocker r6">⚡</span><span class="rocker r7">🤘</span><span class="rocker r8">🎤</span><span class="rocker r1">👩‍🎤</span><span class="rocker r3">🤘</span>
+        </div>
+        <div class="fila-publico">
+          <span class="rocker r5">🎸</span><span class="rocker r2">👨‍🎤</span><span class="rocker r4">👩‍🎤</span><span class="rocker r6">🤘</span><span class="rocker r8">🎸</span>
+        </div>
+         <div class="fila-publico">
+          <span class="rocker r1">👨‍🎤</span><span class="rocker r2">🤘</span><span class="rocker r3">🎸</span><span class="rocker r4">👩‍🎤</span><span class="rocker r5">🔥</span>
+        </div>
+        <div class="fila-publico oculto-movil">
+          <span class="rocker r6">⚡</span><span class="rocker r7">🤘</span><span class="rocker r8">🎤</span><span class="rocker r1">👩‍🎤</span><span class="rocker r3">🤘</span>
         </div>
       </div>
     </div>
 
-    <!-- Pista de Atletismo -->
+    <!-- Pista de Atletismo (EN LA PARTE INFERIOR, UN POCO MENOS DE LA MITAD) -->
     <div id="pista" class="pista">
       <div class="linea-carril c1"></div>
       <div class="linea-carril c2"></div>
