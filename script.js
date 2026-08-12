@@ -12,47 +12,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnIniciar.addEventListener('click', () => {
     // 1. Ocultar pantalla de inicio
-    pantallaInicio.classList.add('oculto');
+    pantallaInicio.style.display = 'none';
 
-    // 2. Reproducir la canción
-    musica.play().catch(error => {
-      console.log("Error al reproducir audio:", error);
+    // 2. Intentar reproducir audio con fallback por si falla o no existe el archivo
+    musica.play().then(() => {
+      console.log("Audio reproducido con éxito.");
+    }).catch(error => {
+      console.warn("No se pudo reproducir el audio (revisa que cancion.mp3 exista en la carpeta):", error);
     });
 
-    // 3. Iniciar animaciones de movimiento
+    // 3. Forzar el inicio de las animaciones visuales
     pista.classList.add('corriendo');
     corredora.classList.add('animar-carrera');
 
-    // 4. Mostrar el mensaje en alemán durante la carrera
-    setTimeout(() => {
-      mensajeCumple.classList.remove('oculto');
-    }, 1000);
+    // Posición inicial visible de la corredora
+    corredora.style.left = '5%';
 
-    // 5. Iniciar avance de la corredora a través del tiempo de la canción
+    // 4. Mostrar el mensaje en alemán
+    if (mensajeCumple) {
+      mensajeCumple.classList.remove('oculto');
+    }
+
+    // 5. Iniciar secuencia de la carrera
     const tiempoInicio = Date.now();
 
     const intervaloAvance = setInterval(() => {
       const tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000;
       const progreso = Math.min(tiempoTranscurrido / DURACION_CANCION_SEG, 1);
 
-      // Avanza gradualmente del 5% al 70% de la pantalla
-      const posicionX = 5 + (progreso * 65);
+      // Avanza gradualmente del 5% al 68% de la pantalla
+      const posicionX = 5 + (progreso * 63);
       corredora.style.left = `${posicionX}%`;
 
-      // A los 10 segundos antes del final aparece la meta ("ZIEL")
+      // A los 10 segundos antes del final aparece el arco de meta ("ZIEL")
       if (tiempoTranscurrido >= (DURACION_CANCION_SEG - 10)) {
-        meta.classList.remove('oculto');
+        if (meta) meta.classList.remove('oculto');
       }
 
-      // Al cruzar la meta al final de la canción
+      // Al cruzar la meta
       if (progreso >= 1) {
         clearInterval(intervaloAvance);
         
-        // Detener carrera y actualizar subtexto de meta en alemán
-        corredora.style.left = '72%';
+        // Detener carrera y actualizar mensaje final
+        corredora.style.left = '70%';
         pista.classList.remove('corriendo');
         corredora.classList.remove('animar-carrera');
-        subtextoMeta.textContent = "🏆 Du hast das Ziel erreicht! 🏆";
+        if (subtextoMeta) {
+          subtextoMeta.textContent = "🏆 Du hast das Ziel erreicht! 🏆";
+        }
       }
     }, 100);
   });
