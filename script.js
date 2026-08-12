@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Elementos de la banda
   const freddie = document.getElementById('freddie');
-  const hetfield = document.getElementById('james');
-  const axl = document.getElementById('axel');
+  const james = document.getElementById('james');
+  const axel = document.getElementById('axel');
   const till = document.getElementById('till');
   const mensajeFinal = document.getElementById('mensaje-final');
 
@@ -28,14 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Entrada de James Hetfield / Metallica (Ej. segundo 8)
     setTimeout(() => {
-      hetfield.classList.remove('oculto');
-      hetfield.classList.add('visible');
+      james.classList.remove('oculto');
+      james.classList.add('visible');
     }, 8000);
 
     // Entrada de Axl Rose / Guns N' Roses (Ej. segundo 13)
     setTimeout(() => {
-      axl.classList.remove('oculto');
-      axl.classList.add('visible');
+      axel.classList.remove('oculto');
+      axel.classList.add('visible');
     }, 13000);
 
     // Entrada de Till Lindemann / Rammstein (Ej. segundo 18)
