@@ -3,63 +3,58 @@ document.addEventListener('DOMContentLoaded', () => {
   const pantallaInicio = document.getElementById('pantalla-inicio');
   const musica = document.getElementById('musica');
   const corredora = document.getElementById('corredora');
-  const pista = document.querySelector('.pista');
+  const pista = document.getElementById('pista');
   const meta = document.getElementById('meta');
-  const mensajeCumple = document.getElementById('mensaje-cumple');
-  const subtextoMeta = document.getElementById('subtexto-meta');
+  const cartelGradas = document.getElementById('cartel-gradas');
+  const mensajeFinal = document.getElementById('mensaje-final');
 
-  const DURACION_CANCION_SEG = 95; // 1 min 35 seg
+  let duracionCancion = 90; // Duración por defecto (1 min 30 seg)
 
   btnIniciar.addEventListener('click', () => {
-    // 1. Ocultar pantalla de inicio
-    pantallaInicio.style.display = 'none';
+    // 1. Ocultar pantalla de bienvenida
+    pantallaInicio.classList.add('oculto');
 
-    // 2. Intentar reproducir audio con fallback por si falla o no existe el archivo
+    // 2. Intentar reproducir audio y detectar su duración real
     musica.play().then(() => {
-      console.log("Audio reproducido con éxito.");
-    }).catch(error => {
-      console.warn("No se pudo reproducir el audio (revisa que cancion.mp3 exista en la carpeta):", error);
+      if (musica.duration && !isNaN(musica.duration)) {
+        duracionCancion = musica.duration;
+      }
+    }).catch(err => {
+      console.warn("No se pudo reproducir el audio de audio/happyrock.mp3. Revisa la ruta.", err);
     });
 
-    // 3. Forzar el inicio de las animaciones visuales
-    pista.classList.add('corriendo');
-    corredora.classList.add('animar-carrera');
+    // 3. Activar animación de la corredora y la pista
+    pista.classList.add('movimiento');
+    corredora.classList.add('animar');
+    cartelGradas.classList.remove('oculto');
 
-    // Posición inicial visible de la corredora
-    corredora.style.left = '5%';
-
-    // 4. Mostrar el mensaje en alemán
-    if (mensajeCumple) {
-      mensajeCumple.classList.remove('oculto');
-    }
-
-    // 5. Iniciar secuencia de la carrera
     const tiempoInicio = Date.now();
 
-    const intervaloAvance = setInterval(() => {
+    // 4. Bucle principal de movimiento
+    const intervalo = setInterval(() => {
       const tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000;
-      const progreso = Math.min(tiempoTranscurrido / DURACION_CANCION_SEG, 1);
+      const progreso = Math.min(tiempoTranscurrido / duracionCancion, 1);
 
-      // Avanza gradualmente del 5% al 68% de la pantalla
+      // Desplazamiento progresivo hacia adelante
       const posicionX = 5 + (progreso * 63);
       corredora.style.left = `${posicionX}%`;
 
-      // A los 10 segundos antes del final aparece el arco de meta ("ZIEL")
-      if (tiempoTranscurrido >= (DURACION_CANCION_SEG - 10)) {
-        if (meta) meta.classList.remove('oculto');
+      // Mostrar arco de meta 10 segundos antes del final
+      if (tiempoTranscurrido >= (duracionCancion - 10)) {
+        meta.classList.remove('oculto');
       }
 
-      // Al cruzar la meta
+      // Llegada a la meta
       if (progreso >= 1) {
-        clearInterval(intervaloAvance);
-        
-        // Detener carrera y actualizar mensaje final
+        clearInterval(intervalo);
+
+        // Detener animación de carrera
+        pista.classList.remove('movimiento');
+        corredora.classList.remove('animar');
         corredora.style.left = '70%';
-        pista.classList.remove('corriendo');
-        corredora.classList.remove('animar-carrera');
-        if (subtextoMeta) {
-          subtextoMeta.textContent = "🏆 Du hast das Ziel erreicht! 🏆";
-        }
+
+        // Mostrar cartel final
+        mensajeFinal.classList.remove('oculto');
       }
     }, 100);
   });
