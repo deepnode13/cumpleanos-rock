@@ -12,42 +12,38 @@
   <div id="pantalla-inicio" class="pantalla-inicio">
     <div class="contenido-bienvenida">
       <div class="icono-carrera">🏃‍♀️</div>
-      <h1>¡BEREIT FÜR DEN LAUF!</h1>
+      <h1>BEREIT FÜR DEN LAUF!</h1>
       <p>Presiona el botón para iniciar la carrera</p>
-      <button id="btn-iniciar" class="btn-inicio">¡START!</button>
+      <button id="btn-iniciar" class="btn-inicio">START!</button>
     </div>
   </div>
 
-  <!-- Escenario Principal -->
-  <div class="escenario">
+  <!-- Escenario Deportivo -->
+  <div class="estadio">
     
-    <!-- Gradas con Gente -->
-    <div class="gradas">
+    <!-- Gradas (Tribunas) -->
+    <div class="gradas-contenedor">
       <div class="reflectores">
-        <div class="foco f1"></div>
-        <div class="foco f2"></div>
+        <div class="foco f-izq"></div>
+        <div class="foco f-der"></div>
       </div>
-      
-      <!-- Cartel en las Gradas (Durante la carrera) -->
+
+      <!-- Cartel de felicitación durante el recorrido -->
       <div id="cartel-gradas" class="cartel-gradas oculto">
         <h2>¡ALLES GUTE ZUM GEBURTSTAG ANNETTE!</h2>
         <p>🏃‍♀️ Lauf weiter! 🏃‍♀️</p>
       </div>
 
-      <!-- Publico SVG Animado -->
-      <div class="publico">
-        <span class="p-persona p1">👤</span>
-        <span class="p-persona p2">🙋‍♀️</span>
-        <span class="p-persona p3">🙋‍♂️</span>
-        <span class="p-persona p4">🙋</span>
-        <span class="p-persona p5">🙌</span>
-        <span class="p-persona p6">🙋‍♀️</span>
-        <span class="p-persona p7">🙋‍♂️</span>
-        <span class="p-persona p8">🎉</span>
-        <span class="p-persona p1">🙋</span>
-        <span class="p-persona p3">🙋‍♀️</span>
-        <span class="p-persona p5">🙋‍♂️</span>
-        <span class="p-persona p2">🙌</span>
+      <!-- Siluetas de Espectadores (Sin emojis) -->
+      <div class="publico-siluetas">
+        <div class="silueta s1"></div>
+        <div class="silueta s2"></div>
+        <div class="silueta s3"></div>
+        <div class="silueta s4"></div>
+        <div class="silueta s5"></div>
+        <div class="silueta s6"></div>
+        <div class="silueta s7"></div>
+        <div class="silueta s8"></div>
       </div>
     </div>
 
@@ -65,16 +61,16 @@
         <div class="poste poste-der"></div>
       </div>
 
-      <!-- Corredora (SVG inline garantizado) -->
-      <div id="corredora" class="corredora">
-        <svg viewBox="0 0 100 120" class="svg-corredora">
+      <!-- Corredora SVG con escala proporcional -->
+      <div id="corredora" class="corredora-wrapper">
+        <svg viewBox="0 0 100 120" preserveAspectRatio="xMidYMid meet" class="corredora-svg">
           <!-- Sombra -->
-          <ellipse cx="50" cy="115" rx="20" ry="4" fill="rgba(0,0,0,0.4)" />
+          <ellipse cx="50" cy="115" rx="20" ry="4" fill="rgba(0,0,0,0.3)" />
           <!-- Coleta -->
           <path class="pelo" d="M 45 25 Q 28 20 22 35" stroke="#4a2e16" stroke-width="5" fill="none" stroke-linecap="round"/>
           <!-- Cabeza -->
           <circle cx="50" cy="22" r="10" fill="#ffdbac" stroke="#333" stroke-width="2"/>
-          <!-- Top Deportivo -->
+          <!-- Top -->
           <path d="M 42 32 L 58 32 L 55 58 L 45 58 Z" fill="#ff3366" stroke="#333" stroke-width="2"/>
           <!-- Shorts -->
           <path d="M 44 58 L 56 58 L 58 70 L 42 70 Z" fill="#222" stroke="#333" stroke-width="2"/>
@@ -100,18 +96,18 @@
           </g>
         </svg>
       </div>
+
     </div>
 
-    <!-- Mensaje Final al llegar a la meta -->
+    <!-- Mensaje Final al cruzar la meta -->
     <div id="mensaje-final" class="mensaje-final oculto">
-      <h1>¡ALLES GUTE ZUM 16. GEBURTSTAG!</h1>
+      <h1>ALLES GUTE ZUM 16. GEBURTSTAG!</h1>
       <p>🏆 Du hast das Ziel erreicht! 🏆</p>
     </div>
 
   </div>
 
-  <!-- Audio desde carpeta audio/ -->
   <audio id="musica" src="audio/happyrock.mp3" preload="auto"></audio>
-
   <script src="script.js"></script>
 </body>
+</html>
