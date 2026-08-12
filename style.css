@@ -111,7 +111,7 @@ body, html {
   bottom: 0;
   width: 100%;
   height: 55%;
-  background: #d34836; /* Color terracota de pista */
+  background: #d34836;
   border-top: 6px solid #fff;
   box-shadow: inset 0 10px 30px rgba(0,0,0,0.5);
   overflow: hidden;
@@ -157,7 +157,7 @@ body, html {
 .corredora-contenedor {
   position: absolute;
   bottom: 12%;
-  left: -120px; /* Inicia fuera de la pantalla */
+  left: -120px;
   width: 140px;
   height: 160px;
   z-index: 10;
@@ -177,7 +177,7 @@ body, html {
   transform-origin: 45px 25px;
 }
 
-/* Animación de Zancadas y Trote al Correr */
+/* Animación de Zancadas y Trote */
 .corredora-contenedor.animar-carrera .svg-corredora {
   animation: rebote-carrera 0.35s infinite alternate ease-in-out;
 }
@@ -265,7 +265,7 @@ body, html {
 /* Mensaje Final */
 .mensaje-contenedor {
   position: absolute;
-  top: 10%;
+  top: 8%;
   width: 100%;
   text-align: center;
   z-index: 20;
@@ -274,14 +274,14 @@ body, html {
 }
 
 .texto-cumple {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #fff;
   text-shadow: 0 0 10px #ff3366, 0 0 20px #ff0055, 0 0 30px #ff0055;
   animation: pulso 1s infinite alternate;
 }
 
 .subtexto-meta {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #ffcc00;
   margin-top: 10px;
   text-shadow: 0 0 10px #ff9900;
@@ -289,7 +289,7 @@ body, html {
 
 @keyframes pulso {
   0% { transform: scale(1); }
-  100% { transform: scale(1.06); }
+  100% { transform: scale(1.05); }
 }
 
 /* Clases de utilidad */
@@ -307,11 +307,11 @@ body, html {
   }
 
   .texto-cumple {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 
   .subtexto-meta {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .cinta-meta {
