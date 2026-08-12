@@ -59,7 +59,7 @@ body, html {
   box-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
 }
 
-/* Escenario */
+/* Escenario con el nuevo nombre de imagen */
 .escenario {
   position: relative;
   width: 100vw;
@@ -100,7 +100,7 @@ body, html {
   100% { opacity: 0.6; transform: scaleY(1.1); }
 }
 
-/* Banda y Músicos */
+/* Ajustes de tamaño y visualización de los músicos */
 .banda {
   position: relative;
   width: 100%;
@@ -114,17 +114,17 @@ body, html {
 .musico {
   position: absolute;
   bottom: 5vh;
-  max-height: 65vh;
+  max-height: 55vh;
   object-fit: contain;
   transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-  filter: drop-shadow(0 0 15px rgba(0,0,0,0.8));
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
 }
 
-/* Posiciones específicas */
-.pos-centro { left: 50%; transform: translateX(-50%); z-index: 4; }
-.pos-izquierda { left: 15%; z-index: 3; }
-.pos-derecha { right: 15%; z-index: 3; }
-.pos-fondo { left: 35%; bottom: 15vh; max-height: 50vh; z-index: 2; }
+/* Posiciones en el escenario */
+.pos-centro { left: 50%; transform: translateX(-50%); z-index: 5; }
+.pos-izquierda { left: 10%; z-index: 4; }
+.pos-derecha { right: 10%; z-index: 4; }
+.pos-fondo { left: 30%; bottom: 18vh; max-height: 45vh; z-index: 2; }
 
 /* Control de Visibilidad */
 .oculto {
