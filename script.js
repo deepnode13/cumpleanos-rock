@@ -23,25 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
       if (musica.duration && !isNaN(musica.duration)) {
         duracionCancion = musica.duration;
       }
-      console.log("Audio reproduciéndose. Duración:", duracionCancion);
+      console.log("Audio reproduciéndose. Duración detectada:", duracionCancion);
     }).catch(err => {
       console.warn("No se pudo reproducir el audio automáticamente. Usando tiempo estimado. Revisa la ruta audio/happyrock.mp3", err);
-      // Fallback: Si no hay audio, la animación dura 95s igual.
     });
 
-    // 3. Activar estado de movimiento visual de la pista y corredora
+    // 3. Activar estado de movimiento visual
     pista.classList.add('movimiento');
     corredora.classList.add('animar');
-    // El cartel ya es visible por defecto en el HTML modificado
 
     const tiempoInicio = Date.now();
 
     // Tiempo total de carrera activa = Duración total de la canción menos 10 segundos
-    const tiempoMeta = Math.max(duracionCancion - 10, 5); // Fallback minimo 5s
+    const tiempoMeta = Math.max(duracionCancion - 10, 5);
 
     const intervalo = setInterval(() => {
       const tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000;
-      // Progreso basado en el tiempo total de carrera (hasta T-10s)
       const progreso = Math.min(tiempoTranscurrido / tiempoMeta, 1);
 
       // Avance progresivo de la corredora a lo largo de la pista (de 5% a 70%)
@@ -64,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         meta.classList.remove('oculto');
         if(cartelGradas) cartelGradas.style.display = 'none';
 
-        // C. Activar show de fuegos y luces intensas de concierto
+        // C. Activar show de fuegos y luces intensas de concierto en la franja superior
         if(fuegoEscenario) fuegoEscenario.classList.remove('oculto');
         if(lucesEscenario) lucesEscenario.classList.add('fiesta-rock');
 
@@ -77,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(mensajeFinal) mensajeFinal.classList.remove('oculto');
         }, 500);
       }
-    }, 100); // Chequeo cada 100ms para precisión
+    }, 100); // Chequeo cada 100ms
   });
 
   // Función de explosión masiva de confeti con Canvas-Confetti
@@ -92,28 +89,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Explosión inicial fuerte central
     confetti({
-      particleCount: 150,
-      spread: 100,
-      origin: { y: 0.7 }, // Cerca de la pista
+      particleCount: 180,
+      spread: 120,
+      origin: { y: 0.6 }, // Desde el centro de la pista
       colors: ['#ff0055', '#ffcc00', '#00d4ff', '#ffffff', '#ff6600']
     });
 
-    // 2. Ráfagas continuas tipo cañón desde los lados del escenario
+    // 2. Ráfagas continuas tipo cañón desde los lados
     (function marcoConfeti() {
       // Cañón Izquierdo
       confetti({
-        particleCount: 8,
+        particleCount: 10,
         angle: 60,
         spread: 55,
-        origin: { x: 0, y: 0.8 },
+        origin: { x: 0, y: 0.7 },
         colors: ['#ff0055', '#ffcc00', '#ffffff']
       });
       // Cañón Derecho
       confetti({
-        particleCount: 8,
+        particleCount: 10,
         angle: 120,
         spread: 55,
-        origin: { x: 1, y: 0.8 },
+        origin: { x: 1, y: 0.7 },
         colors: ['#00d4ff', '#ff0055', '#ffffff']
       });
 
