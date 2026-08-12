@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pista = document.querySelector('.pista');
   const meta = document.getElementById('meta');
   const mensajeCumple = document.getElementById('mensaje-cumple');
+  const subtextoMeta = document.getElementById('subtexto-meta');
 
   const DURACION_CANCION_SEG = 95; // 1 min 35 seg
 
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pista.classList.add('corriendo');
     corredora.classList.add('animar-carrera');
 
-    // 4. Mostrar el mensaje de Feliz Cumpleaños mientras corre
+    // 4. Mostrar el mensaje en alemán durante la carrera
     setTimeout(() => {
       mensajeCumple.classList.remove('oculto');
     }, 1000);
@@ -34,23 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
       const tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000;
       const progreso = Math.min(tiempoTranscurrido / DURACION_CANCION_SEG, 1);
 
-      // La corredora avanza gradualmente del 5% al 70% de la pantalla
+      // Avanza gradualmente del 5% al 70% de la pantalla
       const posicionX = 5 + (progreso * 65);
       corredora.style.left = `${posicionX}%`;
 
-      // Cuando faltan 10 segundos para terminar, aparece la meta
+      // A los 10 segundos antes del final aparece la meta ("ZIEL")
       if (tiempoTranscurrido >= (DURACION_CANCION_SEG - 10)) {
         meta.classList.remove('oculto');
       }
 
-      // Al completar el tiempo (1 min 35 seg)
+      // Al cruzar la meta al final de la canción
       if (progreso >= 1) {
         clearInterval(intervaloAvance);
         
-        // Colocar corredora en la meta y detener carrera
+        // Detener carrera y actualizar subtexto de meta en alemán
         corredora.style.left = '72%';
         pista.classList.remove('corriendo');
         corredora.classList.remove('animar-carrera');
+        subtextoMeta.textContent = "🏆 Du hast das Ziel erreicht! 🏆";
       }
     }, 100);
   });
