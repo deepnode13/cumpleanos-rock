@@ -1,3 +1,11 @@
+:root {
+  --bg-color: #040208;
+  --magenta: #ff007f;
+  --magenta-glow: #ff00d4;
+  --cyan: #00f3ff;
+  --purple: #9d00ff;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,19 +16,16 @@ body, html {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: 'Arial Black', sans-serif;
-  background-color: #000;
+  background-color: var(--bg-color);
+  font-family: 'Impact', 'Arial Black', sans-serif;
   color: #fff;
 }
 
 /* Pantalla de Inicio */
 .pantalla-inicio {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(circle, #222 0%, #000 100%);
+  inset: 0;
+  background: radial-gradient(circle, #1a001a 0%, var(--bg-color) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,52 +33,56 @@ body, html {
   text-align: center;
 }
 
-.contenido-bienvenida h1 {
-  font-size: 2.5rem;
+.icono-rock {
+  font-size: 4rem;
   margin-bottom: 1rem;
-  color: #ff3333;
-  text-shadow: 0 0 10px #ff0000;
+  filter: drop-shadow(0 0 15px var(--magenta));
+}
+
+.contenido-bienvenida h1 {
+  font-size: 3rem;
+  color: var(--magenta);
+  text-shadow: 0 0 15px var(--magenta-glow), 0 0 30px var(--purple);
+  letter-spacing: 2px;
 }
 
 .contenido-bienvenida p {
+  color: var(--cyan);
+  margin: 1rem 0 2rem;
   font-size: 1.2rem;
-  margin-bottom: 2rem;
-  color: #ccc;
 }
 
 .btn-rock {
-  padding: 1rem 2.5rem;
+  padding: 1.2rem 3rem;
   font-size: 1.5rem;
-  font-weight: bold;
   color: #fff;
-  background: linear-gradient(180deg, #e60000 0%, #800000 100%);
-  border: 2px solid #ff6666;
+  background: transparent;
+  border: 3px solid var(--magenta);
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 20px var(--magenta), inset 0 0 15px var(--magenta);
+  transition: all 0.3s ease;
 }
 
 .btn-rock:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
+  background: var(--magenta);
+  box-shadow: 0 0 40px var(--magenta-glow);
 }
 
-/* Escenario con el nuevo nombre de imagen */
+/* Escenario Cyber/Neon */
 .escenario {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url('img/excenario2.png');
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(180deg, #000000 0%, #0d001a 70%, #1f002b 100%);
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
 
-/* Efectos de Luces */
-.luces-escenario {
+/* Focos de luz estilo concierto */
+.luces-foco {
   position: absolute;
   top: 0;
   width: 100%;
@@ -81,88 +90,180 @@ body, html {
   pointer-events: none;
 }
 
-.luz {
+.foco {
   position: absolute;
-  top: 0;
-  width: 30vw;
-  height: 100vh;
+  top: -10%;
+  width: 40vw;
+  height: 110vh;
+  opacity: 0.15;
+  filter: blur(30px);
+  animation: escaner 3s infinite alternate ease-in-out;
+}
+
+.foco-izq {
+  left: -10%;
+  background: conic-gradient(from 135deg, var(--magenta), transparent 60deg);
+}
+
+.foco-der {
+  right: -10%;
+  background: conic-gradient(from 225deg, var(--cyan), transparent 60deg);
+  animation-delay: 1.5s;
+}
+
+@keyframes escaner {
+  0% { transform: rotate(-5deg); opacity: 0.15; }
+  100% { transform: rotate(10deg); opacity: 0.35; }
+}
+
+/* Ecualizador al ritmo */
+.ecualizador {
+  position: absolute;
+  bottom: 20vh;
+  display: flex;
+  gap: 15px;
   opacity: 0.3;
-  filter: blur(20px);
-  animation: parpadeo 2s infinite alternate ease-in-out;
 }
 
-.luz-1 { left: 5%; background: radial-gradient(circle, red, transparent); }
-.luz-2 { left: 35%; background: radial-gradient(circle, gold, transparent); animation-delay: 0.7s; }
-.luz-3 { right: 5%; background: radial-gradient(circle, cyan, transparent); animation-delay: 1.4s; }
-
-@keyframes parpadeo {
-  0% { opacity: 0.2; transform: scaleY(1); }
-  100% { opacity: 0.6; transform: scaleY(1.1); }
+.barra {
+  width: 15px;
+  height: 120px;
+  background: var(--magenta);
+  box-shadow: 0 0 10px var(--magenta);
+  animation: saltar 0.6s infinite alternate ease-in-out;
 }
 
-/* Ajustes de tamaño y visualización de los músicos */
+.b1 { animation-delay: 0.1s; }
+.b2 { animation-delay: 0.4s; }
+.b3 { animation-delay: 0.2s; }
+.b4 { animation-delay: 0.5s; }
+.b5 { animation-delay: 0.3s; }
+.b6 { animation-delay: 0.6s; }
+
+@keyframes saltar {
+  0% { transform: scaleY(0.2); }
+  100% { transform: scaleY(1.2); }
+}
+
+/* Dibujos Vectoriales (SVG) y Colores Magenta */
 .banda {
   position: relative;
   width: 100%;
-  max-width: 1200px;
-  height: 80vh;
+  max-width: 1100px;
+  height: 75vh;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  z-index: 10;
 }
 
 .musico {
   position: absolute;
   bottom: 5vh;
-  max-height: 55vh;
-  object-fit: contain;
-  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-  filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+  width: 260px;
+  height: 320px;
+  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
-/* Posiciones en el escenario */
-.pos-centro { left: 50%; transform: translateX(-50%); z-index: 5; }
-.pos-izquierda { left: 10%; z-index: 4; }
-.pos-derecha { right: 10%; z-index: 4; }
-.pos-fondo { left: 30%; bottom: 18vh; max-height: 45vh; z-index: 2; }
+.svg-musico {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 12px var(--magenta-glow));
+}
 
-/* Control de Visibilidad */
+/* Estilos de Trazo Dibujo (Neon Magenta) */
+.dibu-cuerpo, .dibu-bateria, .dibu-sombrero {
+  fill: none;
+  stroke: var(--magenta);
+  stroke-width: 4;
+}
+
+.dibu-linea, .dibu-brazo, .dibu-linea-masto {
+  stroke: var(--magenta);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.dibu-linea-gruesa {
+  stroke: var(--magenta);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.dibu-pelo, .dibu-instrumento {
+  fill: rgba(255, 0, 127, 0.2);
+  stroke: var(--magenta);
+  stroke-width: 4;
+}
+
+.dibu-bigote, .dibu-mic, .dibu-platos {
+  stroke: var(--cyan);
+  fill: var(--cyan);
+  stroke-width: 3;
+}
+
+.dibu-brazo-cantante {
+  stroke: var(--magenta-glow);
+  stroke-width: 5;
+  animation: cantar 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes cantar {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+/* Posiciones */
+.pos-centro { left: 50%; transform: translateX(-50%); z-index: 5; }
+.pos-izquierda { left: 12%; z-index: 4; }
+.pos-derecha { right: 12%; z-index: 4; }
+.pos-bateria { left: 50%; transform: translateX(-50%); bottom: 25vh; width: 220px; height: 220px; z-index: 2; }
+
+/* Control de Oculto / Visible */
 .oculto {
   opacity: 0;
+  transform: translateY(40px) scale(0.9);
   pointer-events: none;
 }
 
-.pos-centro.oculto, .pos-izquierda.oculto, .pos-derecha.oculto {
-  transform: translateY(50px);
+.pos-centro.oculto, .pos-bateria.oculto {
+  transform: translateX(-50%) translateY(40px) scale(0.9);
 }
 
 .visible {
   opacity: 1 !important;
-  transform: translateY(0) !important;
+  transform: translateY(0) scale(1) !important;
 }
 
-.pos-centro.visible {
-  transform: translateX(-50%) translateY(0) !important;
+.pos-centro.visible, .pos-bateria.visible {
+  transform: translateX(-50%) translateY(0) scale(1) !important;
 }
 
-/* Mensaje Final */
+/* Mensaje Final Alemán */
 .mensaje-final {
   position: absolute;
-  top: 15%;
+  top: 12%;
   width: 100%;
   text-align: center;
-  z-index: 10;
-  transition: opacity 1.5s ease-in-out;
+  z-index: 20;
+  transition: opacity 1.5s ease;
 }
 
-.mensaje-final h2 {
-  font-size: 3.5rem;
+.texto-magenta {
+  font-size: 3.2rem;
   color: #fff;
-  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333, 0 0 40px #ff0055;
-  animation: latido 1s infinite alternate;
+  text-shadow: 0 0 10px var(--magenta), 0 0 20px var(--magenta-glow), 0 0 40px var(--purple);
+  animation: pulso 1s infinite alternate;
 }
 
-@keyframes latido {
-  from { transform: scale(1); }
-  to { transform: scale(1.05); }
+.subtexto-neon {
+  font-size: 1.5rem;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan);
+  margin-top: 10px;
+}
+
+@keyframes pulso {
+  0% { transform: scale(0.98); }
+  100% { transform: scale(1.05); }
 }
