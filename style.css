@@ -9,7 +9,7 @@ body, html {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #08080c;
+  background-color: #050508;
   color: #fff;
 }
 
@@ -20,7 +20,7 @@ body, html {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(10, 10, 15, 0.96);
+  background: rgba(10, 10, 15, 0.98);
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -39,24 +39,9 @@ body, html {
   width: 100%;
 }
 
-.icono-rock {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.tarjeta-bienvenida h1 {
-  font-size: 1.8rem;
-  color: #ffcc00;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
-}
-
-.tarjeta-bienvenida p {
-  font-family: sans-serif;
-  color: #ccc;
-  margin-bottom: 20px;
-}
+.icono-rock { font-size: 3rem; display: block; margin-bottom: 10px; }
+.tarjeta-bienvenida h1 { font-size: 1.8rem; color: #ffcc00; margin-bottom: 10px; letter-spacing: 1px; }
+.tarjeta-bienvenida p { font-family: sans-serif; color: #ccc; margin-bottom: 20px; }
 
 .btn-rock {
   background: linear-gradient(45deg, #ff0055, #ff6600);
@@ -68,46 +53,38 @@ body, html {
   border-radius: 50px;
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(255, 0, 85, 0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s;
 }
+.btn-rock:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(255, 0, 85, 0.7); }
 
-.btn-rock:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(255, 0, 85, 0.7);
-}
-
-/* Contenedor Principal Adaptable */
+/* Contenedor Principal */
 .estadio-contenedor {
   position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  /* Mantiene las gradas arriba y la pista abajo */
-  justify-content: flex-end; 
-  background: #05050a;
-  overflow: hidden;
 }
 
-/* === SECCIÓN GRADAS (MODIFICADA PARA ABARCAR CASI TODO) === */
+/* === SECCIÓN GRADAS (FRANJA SUPERIOR REDUCIDA) === */
 .gradas-contenedor {
   position: relative;
   width: 100%;
-  /* Flex-grow hace que ocupe todo el espacio disponible arriba de la pista */
-  flex-grow: 1; 
-  background: linear-gradient(to bottom, #11111a 0%, #1a1a2a 80%, #11111a 100%);
-  border-bottom: 4px solid #ff0055;
+  /* Ocupa solo el 20% de la altura de la pantalla */
+  height: 20vh; 
+  background: linear-gradient(to bottom, #11111a 0%, #1a1a2a 100%);
+  border-bottom: 3px solid #ff0055;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  /* Centra el cartel y el público verticalmente en el gran espacio */
-  justify-content: center; 
-  padding: 20px 0;
+  padding: 5px 0;
   z-index: 10;
   overflow: hidden;
+  flex-shrink: 0; /* No permite que se encoja */
 }
 
-/* Show de Luces Concierto (Movido dentro de las gradas) */
+/* Show de Luces (Ajustado a la franja superior) */
 .luces-escenario {
   position: absolute;
   top: 0;
@@ -117,285 +94,161 @@ body, html {
   pointer-events: none;
   z-index: 2;
 }
-
 .luz {
   position: absolute;
-  top: -20px;
-  width: 15vw;
+  top: 0;
+  width: 20vw;
   height: 100%;
-  opacity: 0.15;
-  filter: blur(25px);
+  opacity: 0.1;
+  filter: blur(15px);
   transform-origin: top center;
-  transition: opacity 0.5s;
 }
-
-.luz-izq {
-  left: 10%;
-  background: linear-gradient(to bottom, #ff0055, transparent);
-  animation: barridoIzq 3s infinite alternate ease-in-out;
-}
-
-.luz-der {
-  right: 10%;
-  background: linear-gradient(to bottom, #00d4ff, transparent);
-  animation: barridoDer 3.5s infinite alternate ease-in-out;
-}
-
-.luz-centro {
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(to bottom, #ffcc00, transparent);
-  animation: pulsoCentro 2s infinite alternate ease-in-out;
-}
+.luz-izq { left: 15%; background: linear-gradient(to bottom, #ff0055, transparent); animation: barridoIzq 3s infinite alternate ease-in-out; }
+.luz-der { right: 15%; background: linear-gradient(to bottom, #00d4ff, transparent); animation: barridoDer 3s infinite alternate ease-in-out; }
 
 /* Modo Fiesta Concierto (Activo al final) */
-.luces-escenario.fiesta-rock .luz {
-  opacity: 0.7;
-  animation-duration: 0.6s !important;
-}
+.luces-escenario.fiesta-rock .luz { opacity: 0.6; animation-duration: 0.5s !important; }
 
-@keyframes barridoIzq {
-  from { transform: rotate(-20deg); }
-  to { transform: rotate(10deg); }
-}
+@keyframes barridoIzq { from { transform: rotate(-15deg); } to { transform: rotate(10deg); } }
+@keyframes barridoDer { from { transform: rotate(15deg); } to { transform: rotate(-10deg); } }
 
-@keyframes barridoDer {
-  from { transform: rotate(20deg); }
-  to { transform: rotate(-10deg); }
-}
-
-@keyframes pulsoCentro {
-  from { opacity: 0.1; }
-  to { opacity: 0.5; }
-}
-
-/* Flamas de Fuego (Ajustado posición relativa a las gradas grandes) */
+/* Flamas de Fuego (En la franja superior) */
 .fuego-escenario {
   position: absolute;
-  bottom: 10px; /* Cerca de la pista */
+  bottom: 5px;
   width: 100%;
   display: flex;
   justify-content: space-around;
   z-index: 15;
   pointer-events: none;
 }
+.flama { font-size: 2rem; animation: fuegoSalto 0.4s infinite alternate ease-in-out; }
+@keyframes fuegoSalto { from { transform: translateY(0) scale(0.9); } to { transform: translateY(-10px) scale(1.1); } }
 
-.flama {
-  font-size: 3rem;
-  animation: fuegoSalto 0.4s infinite alternate ease-in-out;
-}
-
-@keyframes fuegoSalto {
-  from { transform: translateY(0) scale(0.9); }
-  to { transform: translateY(-20px) scale(1.2); }
-}
-
-/* Cartel en Gradas (Más grande y centrado) */
+/* Cartel en Gradas (Más compacto) */
 .cartel-gradas {
   position: relative;
-  background: rgba(10, 10, 15, 0.95);
-  border: 3px solid #ffcc00;
-  border-radius: 15px;
-  padding: 15px 30px;
+  background: rgba(10, 10, 15, 0.9);
+  border: 2px solid #ffcc00;
+  border-radius: 8px;
+  padding: 5px 15px;
   text-align: center;
-  margin-bottom: 40px; /* Espacio con el público */
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
   z-index: 20;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
   animation: letreroGlow 1.5s infinite alternate;
 }
+.cartel-gradas h2 { font-size: 1rem; color: #ffcc00; letter-spacing: 1px; }
+.cartel-gradas p { font-size: 0.75rem; color: #fff; font-family: sans-serif; margin-top: 2px; }
+@keyframes letreroGlow { from { border-color: #ffcc00; } to { border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.7); } }
 
-.cartel-gradas h2 {
-  font-size: 1.6rem;
-  color: #ffcc00;
-  letter-spacing: 1px;
-}
-
-.cartel-gradas p {
-  font-size: 1.1rem;
-  color: #fff;
-  font-family: sans-serif;
-  margin-top: 5px;
-}
-
-@keyframes letreroGlow {
-  from { box-shadow: 0 0 15px rgba(255, 204, 0, 0.4); border-color: #ffcc00;}
-  to { box-shadow: 0 0 30px rgba(255, 0, 85, 0.9); border-color: #ff0055;}
-}
-
-/* Tribuna con múltiples filas */
-.tribuna {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  z-index: 10;
-  padding: 0 10px;
-}
-
-.fila-publico {
-  display: flex;
-  justify-content: space-around;
-  font-size: 2.2rem; /* Emojis más grandes */
-}
-
-.rocker {
-  display: inline-block;
-  animation: saltoRocker 0.6s infinite alternate ease-in-out;
-}
-
-/* Variaciones de delay animacion */
-.fila-publico:nth-child(even) .rocker { animation-delay: 0.3s; }
-.rocker:nth-child(3n) { animation-delay: 0.5s; }
-
-@keyframes saltoRocker {
-  from { transform: translateY(0) scale(1); }
-  to { transform: translateY(-12px) scale(1.1); }
-}
-
-/* Reflectores estáticos de fondo */
-.reflectores {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  pointer-events: none;
-}
-.foco {
-  position: absolute;
-  bottom: 0;
-  width: 50px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.05);
-  filter: blur(10px);
-}
-.f-izq { left: 5%; }
-.f-der { right: 5%; }
+/* Tribuna (Fila única arriba) */
+.tribuna { width: 100%; margin-top: 5px; z-index: 10; padding: 0 10px; }
+.fila-publico { display: flex; justify-content: space-around; font-size: 1.3rem; }
+.rocker { display: inline-block; animation: saltoRocker 0.6s infinite alternate ease-in-out; }
+.rocker:nth-child(even) { animation-delay: 0.3s; }
+@keyframes saltoRocker { from { transform: translateY(0); } to { transform: translateY(-5px); } }
 
 
-/* === SECCIÓN PISTA (AJUSTADA Altura fia inferior) === */
+/* === SECCIÓN PISTA (OCUPA EL RESTO, CASI TODA LA PANTALLA) === */
 .pista {
   position: relative;
   width: 100%;
-  /* Altura fija para la pista en la parte inferior */
-  height: 120px; 
-  background: #2a2a35;
-  border-top: 4px solid #555;
-  box-shadow: 0 -10px 20px rgba(0,0,0,0.5);
+  /* Flex-grow hace que ocupe todo el espacio restante (80% vh aprox) */
+  flex-grow: 1; 
+  background-color: #bb3a2a; /* Color pista */
+  background-image: 
+    linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.3) 100%),
+    repeating-linear-gradient(90deg, transparent 0, transparent 60px, rgba(255,255,255,0.05) 60px, rgba(255,255,255,0.05) 62px);
   overflow: hidden;
   z-index: 20;
-  flex-shrink: 0; /* No permite que se encoja */
+  box-shadow: inset 0 10px 20px rgba(0,0,0,0.5);
+}
+
+/* Efecto de movimiento en la textura de la pista */
+.pista.movimiento {
+  animation: moverTexturaPista 0.2s linear infinite;
+}
+@keyframes moverTexturaPista {
+  from { background-position-x: 0; }
+  to { background-position-x: -62px; }
 }
 
 .linea-carril {
   position: absolute;
   width: 100%;
-  height: 2px;
-  border-top: 2px dashed rgba(255, 255, 255, 0.5);
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+/* Posiciones de carriles en el gran espacio */
+.c1 { top: 25%; }
+.c2 { top: 50%; }
+.c3 { top: 75%; }
+
+.numero-carril {
+  position: absolute;
+  left: 20px;
+  top: 40%;
+  font-size: 6rem; /* Muy grande */
+  color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%);
 }
 
-.c1 { top: 35%; }
-.c2 { top: 70%; }
-
-/* Animación de ilusión de velocidad en la pista */
-.pista.movimiento .linea-carril {
-  animation: moverLinea 0.2s linear infinite;
-}
-
-@keyframes moverLinea {
-  from { background-position-x: 0; }
-  to { background-position-x: -50px; }
-}
-
-/* Corredora - Centrada verticalmente en la pista de 120px */
+/* Corredora (SVG Responsivo más grande en el espacio ancho) */
 .corredora {
   position: absolute;
-  top: 50%;
+  top: 50%; /* Centrada verticalmente en la pista grande */
   transform: translateY(-50%);
   left: 5%;
-  width: 80px;
-  height: 100px;
+  width: 15vw; /* Basado en ancho de pantalla */
+  max-width: 150px;
+  min-width: 90px;
+  aspect-ratio: 100 / 120;
   z-index: 30;
   transition: left 0.1s linear;
 }
-
-.svg-corredora {
-  width: 100%;
-  height: 100%;
-}
+.svg-corredora { width: 100%; height: 100%; }
 
 /* Animación de carrera */
-.corredora.animar .pierna-izq {
-  animation: correrPiernaIzq 0.3s infinite alternate ease-in-out;
-  transform-origin: 45px 75px;
-}
+.corredora.animar .pierna-izq { animation: correrPiernaIzq 0.3s infinite alternate ease-in-out; transform-origin: 45px 75px; }
+.corredora.animar .pierna-der { animation: correrPiernaDer 0.3s infinite alternate ease-in-out; transform-origin: 55px 75px; }
+.corredora.animar .brazo-izq { animation: correrBrazoIzq 0.3s infinite alternate ease-in-out; transform-origin: 40px 42px; }
+.corredora.animar .brazo-der { animation: correrBrazoDer 0.3s infinite alternate ease-in-out; transform-origin: 60px 42px; }
 
-.corredora.animar .pierna-der {
-  animation: correrPiernaDer 0.3s infinite alternate ease-in-out;
-  transform-origin: 55px 75px;
-}
-
-.corredora.animar .brazo-izq {
-  animation: correrBrazoIzq 0.3s infinite alternate ease-in-out;
-  transform-origin: 40px 42px;
-}
-
-.corredora.animar .brazo-der {
-  animation: correrBrazoDer 0.3s infinite alternate ease-in-out;
-  transform-origin: 60px 42px;
-}
-
-@keyframes correrPiernaIzq {
-  from { transform: rotate(-35deg); }
-  to { transform: rotate(35deg); }
-}
-
-@keyframes correrPiernaDer {
-  from { transform: rotate(35deg); }
-  to { transform: rotate(-35deg); }
-}
-
-@keyframes correrBrazoIzq {
-  from { transform: rotate(30deg); }
-  to { transform: rotate(-30deg); }
-}
-
-@keyframes correrBrazoDer {
-  from { transform: rotate(-30deg); }
-  to { transform: rotate(30deg); }
-}
+@keyframes correrPiernaIzq { from { transform: rotate(-35deg); } to { transform: rotate(35deg); } }
+@keyframes correrPiernaDer { from { transform: rotate(35deg); } to { transform: rotate(-35deg); } }
+@keyframes correrBrazoIzq { from { transform: rotate(30deg); } to { transform: rotate(-30deg); } }
+@keyframes correrBrazoDer { from { transform: rotate(-30deg); } to { transform: rotate(30deg); } }
 
 /* Meta */
 .meta {
   position: absolute;
   right: 8%;
-  bottom: 0;
+  top: 0;
   height: 100%;
-  width: 25px;
-  background: repeating-linear-gradient(0deg, #fff, #fff 15px, #000 15px, #000 30px);
+  width: 30px;
+  background: repeating-linear-gradient(0deg, #fff, #fff 20px, #000 20px, #000 40px);
   z-index: 25;
-  box-shadow: -5px 0 15px rgba(255,255,255,0.3);
+  box-shadow: -5px 0 20px rgba(255,255,255,0.4);
 }
-
 .poster-meta {
   position: absolute;
-  top: -40px;
-  left: -30px;
+  top: 15%;
+  left: -40px;
   background: #ff0055;
   color: #fff;
   padding: 5px 15px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   border-radius: 5px;
   border: 2px solid #fff;
-  box-shadow: 0 0 15px #ff0055;
+  transform: rotate(-90deg); /* Vertical */
 }
 
 /* Modal Final */
 .modal-final {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(5, 5, 10, 0.85);
+  inset: 0;
+  background: rgba(5, 5, 10, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -403,9 +256,8 @@ body, html {
   padding: 20px;
   animation: popIn 0.5s ease-out;
 }
-
 .contenido-modal {
-  background: linear-gradient(135deg, #1f0826, #0a0a14);
+  background: linear-gradient(135deg, #2a0835, #0a0a14);
   border: 4px solid #ffcc00;
   border-radius: 25px;
   padding: 40px 20px;
@@ -414,80 +266,29 @@ body, html {
   width: 100%;
   box-shadow: 0 0 50px rgba(255, 204, 0, 0.7);
 }
-
-.icono-corona {
-  font-size: 4rem;
-  margin-bottom: 15px;
-}
-
-.contenido-modal h2 {
-  font-size: 1.8rem;
-  color: #ffcc00;
-  margin-bottom: 20px;
-  line-height: 1.2;
-  letter-spacing: 1px;
-}
-
-.contenido-modal p {
-  font-family: sans-serif;
-  font-size: 1.1rem;
-  color: #fff;
-  margin-bottom: 20px;
-}
-
-.fuegos-emojis {
-  font-size: 2.2rem;
-}
+.icono-corona { font-size: 4rem; margin-bottom: 15px; }
+.contenido-modal h2 { font-size: 1.8rem; color: #ffcc00; margin-bottom: 20px; line-height: 1.2; }
+.contenido-modal p { font-family: sans-serif; font-size: 1.1rem; color: #fff; margin-bottom: 20px; }
+.fuegos-emojis { font-size: 2.2rem; }
 
 /* Utilidad */
-.oculto {
-  display: none !important;
-}
+.oculto { display: none !important; }
+@keyframes popIn { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-@keyframes popIn {
-  from { transform: scale(0.6); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
+/* === RESPONSIVE CELULAR === */
+@media (max-width: 600px) {
+  /* Gradas aun mas pequeñas en movil */
+  .gradas-contenedor { height: 15vh; }
+  .cartel-gradas h2 { font-size: 0.8rem; }
+  .cartel-gradas p { font-size: 0.6rem; }
+  .fila-publico { font-size: 1rem; }
+  .flama { font-size: 1.5rem; }
 
-/* === ADAPTABILIDAD CELULAR (RESPONSIVE) === */
-@media (max-width: 768px) {
-  /* Gradas grandes en movil */
-  .cartel-gradas {
-    padding: 10px 15px;
-    margin-bottom: 20px;
-  }
-  .cartel-gradas h2 {
-    font-size: 1rem;
-  }
-  .cartel-gradas p {
-    font-size: 0.8rem;
-  }
-  
-  .fila-publico {
-    font-size: 1.5rem; /* Emojis mas pequeños en movil */
-  }
-  .oculto-movil {
-    display: none; /* Quita filas extras en pantallas muy bajas */
-  }
-
-  .luz {
-    width: 25vw;
-  }
-
-  /* Pista mantiene altura pero ajusta elementos */
-  .pista {
-    height: 100px;
-  }
-  .corredora {
-    width: 60px;
-    height: 75px;
-  }
+  /* Pista abarca mas */
+  .numero-carril { font-size: 4rem; }
+  .corredora { width: 22vw; } /* Mas ancha proporcionalmente en movil */
   
   /* Modal final */
-  .tarjeta-bienvenida h1, .contenido-modal h2 {
-    font-size: 1.4rem;
-  }
-  .icono-rock, .icono-corona {
-    font-size: 2.5rem;
-  }
+  .tarjeta-bienvenida h1, .contenido-modal h2 { font-size: 1.3rem; }
+  .icono-rock, .icono-corona { font-size: 2.5rem; }
 }
