@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz Cumpleaños Rockero!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- PANTALLA DE INICIO (Necesaria para habilitar el sonido en el navegador) -->
+  <div id="pantalla-inicio" class="pantalla-inicio">
+    <div class="contenido-bienvenida">
+      <h1>🤘 CONCIERTO ESPECIAL DE CUMPLEAÑOS 🤘</h1>
+      <p>Presiona el botón para iniciar el show</p>
+      <button id="btn-iniciar" class="btn-rock">¡INICIAR SHOW!</button>
+    </div>
+  </div>
+
+  <!-- ESCENARIO PRINCIPAL -->
+  <main class="escenario">
+    <!-- Luces de fondo -->
+    <div class="luces-escenario">
+      <div class="luz luz-1"></div>
+      <div class="luz luz-2"></div>
+      <div class="luz luz-3"></div>
+    </div>
+
+    <!-- MÚSICOS (Aparecerán con JS) -->
+    <div class="banda">
+      <!-- Freddie Mercury (Centro) -->
+      <img src="img/freddie.png" alt="Freddie Mercury" id="freddie" class="musico pos-centro oculto">
+
+      <!-- James Hetfield / Metallica (Izquierda) -->
+      <img src="img/hetfield.png" alt="James Hetfield" id="hetfield" class="musico pos-izquierda oculto">
+
+      <!-- Axl Rose / Guns N' Roses (Derecha) -->
+      <img src="img/axl.png" alt="Axl Rose" id="axl" class="musico pos-derecha oculto">
+
+      <!-- Till Lindemann / Rammstein (Fondo / Batería o Fuego) -->
+      <img src="img/till.png" alt="Till Lindemann" id="till" class="musico pos-fondo oculto">
+    </div>
+
+    <!-- MENSAJE FINAL EN ALEMÁN -->
+    <div id="mensaje-final" class="mensaje-final oculto">
+      <h2>¡ALLES GUTE ZUM GEBURTSTAG! 🎂🎸</h2>
+    </div>
+  </main>
+
+  <!-- ELEMENTO DE AUDIO -->
+  <audio id="audio-rock" src="audio/las-mananitas-rock.mp3" preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
