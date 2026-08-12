@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,49 +18,67 @@
     </div>
   </div>
 
-  <!-- Pista de Atletismo -->
-  <div class="escenario-pista">
+  <!-- Escenario Principal -->
+  <div class="escenario">
     
-    <!-- Luces de fondo y cielo nocturno -->
-    <div class="cielo-estadio"></div>
-    <div class="reflectores">
-      <div class="luz luz-1"></div>
-      <div class="luz luz-2"></div>
+    <!-- Gradas con Gente -->
+    <div class="gradas">
+      <div class="reflectores">
+        <div class="foco f1"></div>
+        <div class="foco f2"></div>
+      </div>
+      
+      <!-- Cartel en las Gradas (Durante la carrera) -->
+      <div id="cartel-gradas" class="cartel-gradas oculto">
+        <h2>¡ALLES GUTE ZUM GEBURTSTAG ANNETTE!</h2>
+        <p>🏃‍♀️ Lauf weiter! 🏃‍♀️</p>
+      </div>
+
+      <!-- Publico SVG Animado -->
+      <div class="publico">
+        <span class="p-persona p1">👤</span>
+        <span class="p-persona p2">🙋‍♀️</span>
+        <span class="p-persona p3">🙋‍♂️</span>
+        <span class="p-persona p4">🙋</span>
+        <span class="p-persona p5">🙌</span>
+        <span class="p-persona p6">🙋‍♀️</span>
+        <span class="p-persona p7">🙋‍♂️</span>
+        <span class="p-persona p8">🎉</span>
+        <span class="p-persona p1">🙋</span>
+        <span class="p-persona p3">🙋‍♀️</span>
+        <span class="p-persona p5">🙋‍♂️</span>
+        <span class="p-persona p2">🙌</span>
+      </div>
     </div>
 
-    <!-- Pista con carriles -->
-    <div class="pista">
-      <div class="linea-carril c1"></div>
-      <div class="linea-carril c2"></div>
-      <div class="linea-carril c3"></div>
+    <!-- Pista de Atletismo -->
+    <div id="pista" class="pista">
+      <div class="linea c1"></div>
+      <div class="linea c2"></div>
+      <div class="linea c3"></div>
       <div class="numero-carril">16</div>
 
-      <!-- Arco de Meta (Aparece al final) -->
-      <div id="meta" class="meta-contenedor oculto">
+      <!-- Arco de Meta -->
+      <div id="meta" class="meta oculto">
         <div class="cinta-meta">ZIEL</div>
         <div class="poste poste-izq"></div>
         <div class="poste poste-der"></div>
       </div>
 
-      <!-- Corredora Animada (SVG Vectorial) -->
-      <div id="corredora" class="corredora-contenedor">
-        <svg class="svg-corredora" viewBox="0 0 100 120">
+      <!-- Corredora (SVG inline garantizado) -->
+      <div id="corredora" class="corredora">
+        <svg viewBox="0 0 100 120" class="svg-corredora">
           <!-- Sombra -->
           <ellipse cx="50" cy="115" rx="20" ry="4" fill="rgba(0,0,0,0.4)" />
-          
-          <!-- Coleta de Caballo -->
-          <path class="pelo-coleta" d="M 45 25 Q 30 20 25 35" />
-
+          <!-- Coleta -->
+          <path class="pelo" d="M 45 25 Q 28 20 22 35" stroke="#4a2e16" stroke-width="5" fill="none" stroke-linecap="round"/>
           <!-- Cabeza -->
           <circle cx="50" cy="22" r="10" fill="#ffdbac" stroke="#333" stroke-width="2"/>
-          
-          <!-- Cuerpo / Top deportivo -->
+          <!-- Top Deportivo -->
           <path d="M 42 32 L 58 32 L 55 58 L 45 58 Z" fill="#ff3366" stroke="#333" stroke-width="2"/>
-          
           <!-- Shorts -->
           <path d="M 44 58 L 56 58 L 58 70 L 42 70 Z" fill="#222" stroke="#333" stroke-width="2"/>
-
-          <!-- Brazos animables -->
+          <!-- Brazos -->
           <g class="brazo-izq">
             <line x1="45" y1="36" x2="30" y2="50" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
             <line x1="30" y1="50" x2="20" y2="40" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
@@ -69,37 +87,32 @@
             <line x1="55" y1="36" x2="70" y2="48" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
             <line x1="70" y1="48" x2="80" y2="60" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
           </g>
-
-          <!-- Piernas animables -->
+          <!-- Piernas -->
           <g class="pierna-izq">
             <line x1="46" y1="70" x2="35" y2="90" stroke="#ffdbac" stroke-width="6" stroke-linecap="round"/>
             <line x1="35" y1="90" x2="25" y2="110" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
-            <!-- Tenis -->
             <ellipse cx="22" cy="110" rx="6" ry="3" fill="#fff" />
           </g>
           <g class="pierna-der">
             <line x1="54" y1="70" x2="65" y2="88" stroke="#ffdbac" stroke-width="6" stroke-linecap="round"/>
             <line x1="65" y1="88" x2="75" y2="108" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
-            <!-- Tenis -->
             <ellipse cx="78" cy="108" rx="6" ry="3" fill="#fff" />
           </g>
         </svg>
       </div>
-
     </div>
 
-    <!-- Mensaje en Alemán que aparece durante la carrera -->
-    <div id="mensaje-cumple" class="mensaje-contenedor oculto">
-      <h1 class="texto-cumple">¡ALLES GUTE ZUM GEBURTSTAG ANNETTE!</h1>
-      <p id="subtexto-meta" class="subtexto-meta">🏃‍♀️ Lauf weiter! 🏃‍♀️</p>
+    <!-- Mensaje Final al llegar a la meta -->
+    <div id="mensaje-final" class="mensaje-final oculto">
+      <h1>¡ALLES GUTE ZUM 16. GEBURTSTAG!</h1>
+      <p>🏆 Du hast das Ziel erreicht! 🏆</p>
     </div>
 
   </div>
 
-  <!-- Audio de la Canción -->
-  <audio id="audio-rock" src="audio/happyrock.mp3" preload="auto"></audio>
+  <!-- Audio desde carpeta audio/ -->
+  <audio id="musica" src="audio/happyrock.mp3" preload="auto"></audio>
 
   <script src="script.js"></script>
-  
 </body>
 </html>
