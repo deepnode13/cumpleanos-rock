@@ -155,7 +155,7 @@ body, html {
   z-index: 7;
 }
 
-/* Músicos (Ilustración / Siluetas de Concierto) */
+/* Músicos (Ilustración / Siluetas) */
 .banda {
   position: relative;
   width: 100%;
@@ -181,7 +181,7 @@ body, html {
   filter: drop-shadow(0 0 8px rgba(0,0,0,0.9));
 }
 
-/* Trazo Blanco/Gris Claro con iluminación de escenario */
+/* Estilos de Trazo Dibujo */
 .dibu-cuerpo, .dibu-bateria, .dibu-sombrero {
   fill: none;
   stroke: #eeeeee;
@@ -212,15 +212,84 @@ body, html {
   stroke-width: 3;
 }
 
+/* ==========================================================
+   ANIMACIONES CONTINUAS DE LOS PERSONAJES
+   ========================================================== */
+
+/* Freddie Mercury (Cantante) - Movimiento de torso y brazo */
+#freddie.visible .svg-musico {
+  animation: freddie-cantar 0.6s infinite alternate ease-in-out;
+  transform-origin: bottom center;
+}
+
 .dibu-brazo-cantante {
   stroke: #ffffff;
   stroke-width: 5;
-  animation: cantante-move 0.7s infinite alternate ease-in-out;
+  animation: brazo-mic 0.4s infinite alternate ease-in-out;
+  transform-origin: 100px 90px;
 }
 
-@keyframes cantante-move {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-6px); }
+@keyframes freddie-cantar {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.03) rotate(-3deg); }
+}
+
+@keyframes brazo-mic {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* James Hetfield (Metallica) - Headbanging y tocando la guitarra */
+#hetfield.visible .svg-musico {
+  animation: headbanging 0.4s infinite alternate ease-in-out;
+  transform-origin: bottom center;
+}
+
+#hetfield.visible .guitarra {
+  animation: rasgueo-fast 0.25s infinite alternate ease-in-out;
+  transform-origin: 100px 140px;
+}
+
+@keyframes headbanging {
+  0% { transform: rotate(0deg) translateY(0); }
+  100% { transform: rotate(4deg) translateY(-8px); }
+}
+
+@keyframes rasgueo-fast {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-5deg); }
+}
+
+/* Slash / Axl (Guns N' Roses) - Movimiento de cuerpo y guitarra */
+#axl.visible .svg-musico {
+  animation: slash-move 0.5s infinite alternate ease-in-out;
+  transform-origin: bottom center;
+}
+
+#axl.visible .guitarra {
+  animation: rasgueo-slow 0.3s infinite alternate ease-in-out;
+  transform-origin: 100px 140px;
+}
+
+@keyframes slash-move {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-4deg) translateY(-5px); }
+}
+
+@keyframes rasgueo-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(6deg); }
+}
+
+/* Till Lindemann (Baterista) - Movimiento de brazos con baquetas */
+#till.visible .dibu-brazo {
+  animation: bateria-golpe 0.2s infinite alternate ease-in-out;
+  transform-origin: 100px 100px;
+}
+
+@keyframes bateria-golpe {
+  0% { transform: rotate(-8deg); }
+  100% { transform: rotate(12deg); }
 }
 
 /* Posición en escenario */
