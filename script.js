@@ -1,48 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
   const btnIniciar = document.getElementById('btn-iniciar');
   const pantallaInicio = document.getElementById('pantalla-inicio');
-  const audio = document.getElementById('audio-rock');
+  const musica = document.getElementById('musica');
+  const corredora = document.getElementById('corredora');
+  const pista = document.querySelector('.pista');
+  const meta = document.getElementById('meta');
+  const mensajeCumple = document.getElementById('mensaje-cumple');
 
-  // Integrantes en SVG
-  const freddie = document.getElementById('freddie');
-  const hetfield = document.getElementById('hetfield');
-  const axl = document.getElementById('axl');
-  const till = document.getElementById('till');
-  const mensajeFinal = document.getElementById('mensaje-final');
+  const DURACION_CANCION_SEG = 95; // 1 min 35 seg
 
   btnIniciar.addEventListener('click', () => {
-    pantallaInicio.style.display = 'none';
+    // 1. Ocultar pantalla de inicio
+    pantallaInicio.classList.add('oculto');
 
-    audio.play().catch(error => console.log("Error al reproducir audio:", error));
+    // 2. Reproducir la canción
+    musica.play().catch(error => {
+      console.log("Error al reproducir audio:", error);
+    });
 
-    // 1. Entra Baterista (Till - Rammstein) a los 2 segundos
+    // 3. Iniciar animaciones de movimiento
+    pista.classList.add('corriendo');
+    corredora.classList.add('animar-carrera');
+
+    // 4. Mostrar el mensaje de Feliz Cumpleaños mientras corre
     setTimeout(() => {
-      till.classList.remove('oculto');
-      till.classList.add('visible');
-    }, 2000);
+      mensajeCumple.classList.remove('oculto');
+    }, 1000);
 
-    // 2. Entra Guitarrista Rítmico (James Hetfield - Metallica) a los 6 segundos
-    setTimeout(() => {
-      hetfield.classList.remove('oculto');
-      hetfield.classList.add('visible');
-    }, 6000);
+    // 5. Iniciar avance de la corredora a través del tiempo de la canción
+    const tiempoInicio = Date.now();
 
-    // 3. Entra Guitarrista Solista (Slash / Axl - Guns N' Roses) a los 10 segundos
-    setTimeout(() => {
-      axl.classList.remove('oculto');
-      axl.classList.add('visible');
-    }, 10000);
+    const intervaloAvance = setInterval(() => {
+      const tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000;
+      const progreso = Math.min(tiempoTranscurrido / DURACION_CANCION_SEG, 1);
 
-    // 4. Entra Cantante (Freddie Mercury) en el centro a los 14 segundos
-    setTimeout(() => {
-      freddie.classList.remove('oculto');
-      freddie.classList.add('visible');
-    }, 14000);
+      // La corredora avanza gradualmente del 5% al 70% de la pantalla
+      const posicionX = 5 + (progreso * 65);
+      corredora.style.left = `${posicionX}%`;
 
-    // 5. Mensaje en Alemán en el clímax (18 segundos)
-    setTimeout(() => {
-      mensajeFinal.classList.remove('oculto');
-      mensajeFinal.classList.add('visible');
-    }, 18000);
+      // Cuando faltan 10 segundos para terminar, aparece la meta
+      if (tiempoTranscurrido >= (DURACION_CANCION_SEG - 10)) {
+        meta.classList.remove('oculto');
+      }
+
+      // Al completar el tiempo (1 min 35 seg)
+      if (progreso >= 1) {
+        clearInterval(intervaloAvance);
+        
+        // Colocar corredora en la meta y detener carrera
+        corredora.style.left = '72%';
+        pista.classList.remove('corriendo');
+        corredora.classList.remove('animar-carrera');
+      }
+    }, 100);
   });
 });
