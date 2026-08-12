@@ -11,63 +11,66 @@
   <!-- PANTALLA INICIAL -->
   <div id="pantalla-inicio" class="pantalla-inicio">
     <div class="contenido-bienvenida">
-      <div class="icono-rock">🤘⚡🤘</div>
-      <h1>ROCK CONCERT SHOW</h1>
-      <p>Presiona para iniciar el show animado</p>
+      <div class="icono-rock">🔥🎸🔥</div>
+      <h1>LIVE ROCK CONCERT</h1>
+      <p>Presiona para iniciar el show</p>
       <button id="btn-iniciar" class="btn-rock">¡INICIAR SHOW!</button>
     </div>
   </div>
 
-  <!-- ESCENARIO CON ILUSTRACIONES VECTORIALES SVG -->
+  <!-- ESCENARIO REALISTA DE ROCK -->
   <main class="escenario">
     
-    <!-- Luces y Ecualizador de Fondo -->
+    <!-- Estructura de Truss/Escenario superior -->
+    <div class="truss-superior"></div>
+
+    <!-- FOCOS PARPADEANTES -->
     <div class="luces-foco">
-      <div class="foco foco-izq"></div>
-      <div class="foco foco-der"></div>
+      <div class="foco foco-1"></div>
+      <div class="foco foco-2"></div>
+      <div class="foco foco-3"></div>
+      <div class="foco foco-4"></div>
     </div>
     
-    <div class="ecualizador">
-      <div class="barra b1"></div>
-      <div class="barra b2"></div>
-      <div class="barra b3"></div>
-      <div class="barra b4"></div>
-      <div class="barra b5"></div>
-      <div class="barra b6"></div>
+    <!-- TORRES DE FUEGO Y PIROTECNIA -->
+    <div class="fuego-escenario">
+      <div class="llama llama-1"></div>
+      <div class="llama llama-2"></div>
+      <div class="llama llama-3"></div>
+      <div class="llama llama-4"></div>
     </div>
 
-    <!-- ESCENARIO Y MÚSICOS ILUSTRADOS (SVG) -->
+    <!-- HUMO DE ESCENARIO -->
+    <div class="humo-escenario"></div>
+
+    <!-- BANDA DIBUJADA / SILUETAS ILUSTRADAS (SVG) -->
     <div class="banda">
 
       <!-- BATERISTA (RAMMSTEIN / TILL) - FONDO -->
       <div id="till" class="musico pos-bateria oculto">
         <svg viewBox="0 0 200 200" class="svg-musico">
-          <!-- Batería -->
+          <!-- Batería y Platos -->
           <circle cx="60" cy="150" r="25" class="dibu-bateria"/>
           <circle cx="140" cy="150" r="25" class="dibu-bateria"/>
           <ellipse cx="100" cy="160" rx="35" ry="30" class="dibu-bateria"/>
-          <path d="M 40,110 L 80,110 M 120,110 L 160,110" class="dibu-platos"/>
+          <path d="M 30,100 L 70,110 M 130,110 L 170,100" class="dibu-platos"/>
           <!-- Baterista -->
-          <circle cx="100" cy="80" r="18" class="dibu-cuerpo"/>
-          <path d="M 100,98 L 100,130" class="dibu-linea"/>
-          <!-- Brazos con baquetas animadas -->
-          <path d="M 100,105 L 60,115" class="dibu-brazo brazo-izq"/>
-          <path d="M 100,105 L 140,115" class="dibu-brazo brazo-der"/>
+          <circle cx="100" cy="75" r="18" class="dibu-cuerpo"/>
+          <path d="M 100,93 L 100,130" class="dibu-linea"/>
+          <path d="M 100,100 L 60,115 M 100,100 L 140,115" class="dibu-brazo"/>
         </svg>
       </div>
 
       <!-- GUITARRISTA LÍDER (METALLICA / JAMES) - IZQUIERDA -->
       <div id="hetfield" class="musico pos-izquierda oculto">
         <svg viewBox="0 0 200 250" class="svg-musico">
-          <!-- Pelo largo y Cabeza -->
           <path d="M 80,50 Q 100,30 120,50 Q 130,80 120,90 L 80,90 Z" class="dibu-pelo"/>
           <circle cx="100" cy="65" r="16" class="dibu-cuerpo"/>
-          <!-- Cuerpo -->
           <path d="M 100,81 L 100,160 M 100,160 L 80,220 M 100,160 L 120,220" class="dibu-linea-gruesa"/>
           <!-- Guitarra Explorer -->
-          <g class="guitarra-rock">
-            <path d="M 60,120 L 150,150 L 140,165 L 70,140 Z" class="dibu-instrumento"/>
-            <path d="M 140,145 L 180,120" class="dibu-linea-masto"/>
+          <g class="guitarra">
+            <path d="M 50,110 L 140,150 L 130,165 L 60,130 Z" class="dibu-instrumento"/>
+            <path d="M 130,145 L 180,115" class="dibu-masto"/>
           </g>
         </svg>
       </div>
@@ -75,15 +78,12 @@
       <!-- VOCALISTA (FREDDIE MERCURY) - CENTRO -->
       <div id="freddie" class="musico pos-centro oculto">
         <svg viewBox="0 0 200 250" class="svg-musico">
-          <!-- Cabeza y Bigote Iconic -->
           <circle cx="100" cy="55" r="18" class="dibu-cuerpo"/>
-          <path d="M 90,62 Q 100,60 110,62" class="dibu-bigote"/>
-          <!-- Cuerpo Pose Rockera -->
+          <path d="M 88,62 Q 100,60 112,62" class="dibu-bigote"/>
           <path d="M 100,73 L 100,150 M 100,150 L 75,220 M 100,150 L 125,220" class="dibu-linea-gruesa"/>
-          <!-- Brazo levantado -->
           <path d="M 100,90 L 135,50 L 145,30" class="dibu-brazo-cantante"/>
-          <!-- Micrófono con caño -->
-          <path d="M 100,90 L 70,130 L 60,180" class="dibu-linea"/>
+          <!-- Pie de micrófono clásico sin base -->
+          <path d="M 100,90 L 65,135 L 55,190" class="dibu-linea"/>
           <circle cx="145" cy="30" r="7" class="dibu-mic"/>
         </svg>
       </div>
@@ -93,24 +93,23 @@
         <svg viewBox="0 0 200 250" class="svg-musico">
           <!-- Sombrero de Copa -->
           <rect x="80" y="20" width="40" height="35" class="dibu-sombrero"/>
-          <path d="M 70,55 L 130,55" class="dibu-sombrero"/>
+          <path d="M 68,55 L 132,55" class="dibu-sombrero"/>
           <circle cx="100" cy="70" r="16" class="dibu-cuerpo"/>
-          <!-- Cuerpo -->
           <path d="M 100,86 L 100,160 M 100,160 L 85,220 M 100,160 L 115,220" class="dibu-linea-gruesa"/>
           <!-- Guitarra Les Paul -->
-          <g class="guitarra-rock-2">
-            <ellipse cx="110" cy="140" rx="20" ry="30" class="dibu-instrumento"/>
-            <path d="M 110,140 L 50,110" class="dibu-linea-masto"/>
+          <g class="guitarra">
+            <ellipse cx="115" cy="140" rx="22" ry="32" class="dibu-instrumento"/>
+            <path d="M 115,140 L 50,105" class="dibu-masto"/>
           </g>
         </svg>
       </div>
 
     </div>
 
-    <!-- CARTEL FINAL EN ALEMÁN -->
+    <!-- CARTEL FINAL EN ALEMÁN CON LUZ DE FUEGO -->
     <div id="mensaje-final" class="mensaje-final oculto">
-      <h2 class="texto-magenta">¡ALLES GUTE ZUM GEBURTSTAG ANNETTE!</h2>
-      <div class="subtexto-neon">🎂🎸 ALLES GUTE! 🎸🎂</div>
+      <h2 class="texto-rock">¡ALLES GUTE ZUM GEBURTSTAG ANNETTE!</h2>
+      <div class="subtexto-fuego">🔥🎂 ALLES GUTE! 🎂🔥</div>
     </div>
   </main>
 
