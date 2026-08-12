@@ -1,11 +1,3 @@
-:root {
-  --bg-color: #040208;
-  --magenta: #ff007f;
-  --magenta-glow: #ff00d4;
-  --cyan: #00f3ff;
-  --purple: #9d00ff;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,7 +8,7 @@ body, html {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: var(--bg-color);
+  background-color: #000;
   font-family: 'Impact', 'Arial Black', sans-serif;
   color: #fff;
 }
@@ -25,7 +17,7 @@ body, html {
 .pantalla-inicio {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, #1a001a 0%, var(--bg-color) 100%);
+  background: radial-gradient(circle, #222 0%, #000 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,18 +28,17 @@ body, html {
 .icono-rock {
   font-size: 4rem;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 0 15px var(--magenta));
 }
 
 .contenido-bienvenida h1 {
   font-size: 3rem;
-  color: var(--magenta);
-  text-shadow: 0 0 15px var(--magenta-glow), 0 0 30px var(--purple);
+  color: #ff3300;
+  text-shadow: 0 0 20px #ff0000;
   letter-spacing: 2px;
 }
 
 .contenido-bienvenida p {
-  color: var(--cyan);
+  color: #ccc;
   margin: 1rem 0 2rem;
   font-size: 1.2rem;
 }
@@ -56,96 +47,115 @@ body, html {
   padding: 1.2rem 3rem;
   font-size: 1.5rem;
   color: #fff;
-  background: transparent;
-  border: 3px solid var(--magenta);
+  background: linear-gradient(180deg, #cc0000 0%, #660000 100%);
+  border: 2px solid #ff4444;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 0 20px var(--magenta), inset 0 0 15px var(--magenta);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
   transition: all 0.3s ease;
 }
 
 .btn-rock:hover {
   transform: scale(1.08);
-  background: var(--magenta);
-  box-shadow: 0 0 40px var(--magenta-glow);
+  box-shadow: 0 0 40px rgba(255, 50, 0, 0.9);
 }
 
-/* Escenario Cyber/Neon */
+/* Escenario Oscuro Concierto */
 .escenario {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(180deg, #000000 0%, #0d001a 70%, #1f002b 100%);
+  background: linear-gradient(180deg, #050505 0%, #111111 60%, #080808 100%);
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
 
-/* Focos de luz estilo concierto */
-.luces-foco {
+/* Estructura metálica superior (Truss) */
+.truss-superior {
   position: absolute;
   top: 0;
   width: 100%;
+  height: 25px;
+  background: repeating-linear-gradient(90deg, #333 0px, #333 20px, #111 20px, #111 40px);
+  border-bottom: 3px solid #555;
+  z-index: 15;
+}
+
+/* Focos parpadeantes de concierto */
+.luces-foco {
+  position: absolute;
+  top: 25px;
+  width: 100%;
   height: 100%;
   pointer-events: none;
+  z-index: 3;
 }
 
 .foco {
   position: absolute;
-  top: -10%;
-  width: 40vw;
-  height: 110vh;
-  opacity: 0.15;
-  filter: blur(30px);
-  animation: escaner 3s infinite alternate ease-in-out;
+  top: 0;
+  width: 25vw;
+  height: 100vh;
+  opacity: 0;
 }
 
-.foco-izq {
-  left: -10%;
-  background: conic-gradient(from 135deg, var(--magenta), transparent 60deg);
+.foco-1 { left: 0%; background: conic-gradient(from 150deg at 50% 0, rgba(255, 200, 0, 0.4), transparent 50deg); animation: flash-luz 1.2s infinite alternate ease-in-out; }
+.foco-2 { left: 25%; background: conic-gradient(from 165deg at 50% 0, rgba(255, 0, 0, 0.5), transparent 50deg); animation: flash-luz 1.8s infinite alternate ease-in-out 0.3s; }
+.foco-3 { left: 50%; background: conic-gradient(from 195deg at 50% 0, rgba(255, 200, 0, 0.5), transparent 50deg); animation: flash-luz 1.5s infinite alternate ease-in-out 0.6s; }
+.foco-4 { left: 75%; background: conic-gradient(from 210deg at 50% 0, rgba(255, 0, 0, 0.4), transparent 50deg); animation: flash-luz 2s infinite alternate ease-in-out 0.9s; }
+
+@keyframes flash-luz {
+  0% { opacity: 0.05; transform: scaleX(0.8); }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.1; transform: scaleX(1.1); }
 }
 
-.foco-der {
-  right: -10%;
-  background: conic-gradient(from 225deg, var(--cyan), transparent 60deg);
-  animation-delay: 1.5s;
-}
-
-@keyframes escaner {
-  0% { transform: rotate(-5deg); opacity: 0.15; }
-  100% { transform: rotate(10deg); opacity: 0.35; }
-}
-
-/* Ecualizador al ritmo */
-.ecualizador {
+/* Animación de Fuego en el Escenario */
+.fuego-escenario {
   position: absolute;
-  bottom: 20vh;
+  bottom: 0;
+  width: 100%;
+  height: 180px;
   display: flex;
-  gap: 15px;
-  opacity: 0.3;
+  justify-content: space-around;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 8;
 }
 
-.barra {
-  width: 15px;
-  height: 120px;
-  background: var(--magenta);
-  box-shadow: 0 0 10px var(--magenta);
-  animation: saltar 0.6s infinite alternate ease-in-out;
+.llama {
+  width: 40px;
+  height: 0px;
+  background: linear-gradient(0deg, #ff0000 0%, #ff8800 60%, #ffff00 100%);
+  border-radius: 50% 50% 20% 20%;
+  filter: blur(4px);
+  box-shadow: 0 0 30px #ff3300, 0 0 60px #ff6600;
+  animation: llamarada 0.8s infinite alternate ease-in-out;
 }
 
-.b1 { animation-delay: 0.1s; }
-.b2 { animation-delay: 0.4s; }
-.b3 { animation-delay: 0.2s; }
-.b4 { animation-delay: 0.5s; }
-.b5 { animation-delay: 0.3s; }
-.b6 { animation-delay: 0.6s; }
+.llama-1 { animation-delay: 0.1s; }
+.llama-2 { animation-delay: 0.4s; }
+.llama-3 { animation-delay: 0.2s; }
+.llama-4 { animation-delay: 0.5s; }
 
-@keyframes saltar {
-  0% { transform: scaleY(0.2); }
-  100% { transform: scaleY(1.2); }
+@keyframes llamarada {
+  0% { height: 30px; opacity: 0.4; }
+  100% { height: 160px; opacity: 0.95; }
 }
 
-/* Dibujos Vectoriales (SVG) y Colores Magenta */
+/* Humo en la base */
+.humo-escenario {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 7;
+}
+
+/* Músicos (Ilustración / Siluetas de Concierto) */
 .banda {
   position: relative;
   width: 100%;
@@ -154,116 +164,116 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  z-index: 10;
+  z-index: 6;
 }
 
 .musico {
   position: absolute;
-  bottom: 5vh;
-  width: 260px;
-  height: 320px;
+  bottom: 4vh;
+  width: 250px;
+  height: 310px;
   transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 .svg-musico {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 0 12px var(--magenta-glow));
+  filter: drop-shadow(0 0 8px rgba(0,0,0,0.9));
 }
 
-/* Estilos de Trazo Dibujo (Neon Magenta) */
+/* Trazo Blanco/Gris Claro con iluminación de escenario */
 .dibu-cuerpo, .dibu-bateria, .dibu-sombrero {
   fill: none;
-  stroke: var(--magenta);
+  stroke: #eeeeee;
   stroke-width: 4;
 }
 
-.dibu-linea, .dibu-brazo, .dibu-linea-masto {
-  stroke: var(--magenta);
+.dibu-linea, .dibu-brazo, .dibu-masto {
+  stroke: #eeeeee;
   stroke-width: 4;
   stroke-linecap: round;
 }
 
 .dibu-linea-gruesa {
-  stroke: var(--magenta);
+  stroke: #ffffff;
   stroke-width: 6;
   stroke-linecap: round;
 }
 
 .dibu-pelo, .dibu-instrumento {
-  fill: rgba(255, 0, 127, 0.2);
-  stroke: var(--magenta);
+  fill: rgba(255, 255, 255, 0.15);
+  stroke: #ffffff;
   stroke-width: 4;
 }
 
 .dibu-bigote, .dibu-mic, .dibu-platos {
-  stroke: var(--cyan);
-  fill: var(--cyan);
+  stroke: #ffcc00;
+  fill: #ffcc00;
   stroke-width: 3;
 }
 
 .dibu-brazo-cantante {
-  stroke: var(--magenta-glow);
+  stroke: #ffffff;
   stroke-width: 5;
-  animation: cantar 0.8s infinite alternate ease-in-out;
+  animation: cantante-move 0.7s infinite alternate ease-in-out;
 }
 
-@keyframes cantar {
+@keyframes cantante-move {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-8px); }
+  100% { transform: translateY(-6px); }
 }
 
-/* Posiciones */
+/* Posición en escenario */
 .pos-centro { left: 50%; transform: translateX(-50%); z-index: 5; }
 .pos-izquierda { left: 12%; z-index: 4; }
 .pos-derecha { right: 12%; z-index: 4; }
-.pos-bateria { left: 50%; transform: translateX(-50%); bottom: 25vh; width: 220px; height: 220px; z-index: 2; }
+.pos-bateria { left: 50%; transform: translateX(-50%); bottom: 22vh; width: 220px; height: 220px; z-index: 2; }
 
-/* Control de Oculto / Visible */
+/* Transiciones Oculto / Visible */
 .oculto {
   opacity: 0;
-  transform: translateY(40px) scale(0.9);
+  transform: translateY(40px);
   pointer-events: none;
 }
 
 .pos-centro.oculto, .pos-bateria.oculto {
-  transform: translateX(-50%) translateY(40px) scale(0.9);
+  transform: translateX(-50%) translateY(40px);
 }
 
 .visible {
   opacity: 1 !important;
-  transform: translateY(0) scale(1) !important;
+  transform: translateY(0) !important;
 }
 
 .pos-centro.visible, .pos-bateria.visible {
-  transform: translateX(-50%) translateY(0) scale(1) !important;
+  transform: translateX(-50%) translateY(0) !important;
 }
 
-/* Mensaje Final Alemán */
+/* Mensaje Final en Alemán */
 .mensaje-final {
   position: absolute;
-  top: 12%;
+  top: 15%;
   width: 100%;
   text-align: center;
   z-index: 20;
   transition: opacity 1.5s ease;
 }
 
-.texto-magenta {
-  font-size: 3.2rem;
+.texto-rock {
+  font-size: 3.5rem;
   color: #fff;
-  text-shadow: 0 0 10px var(--magenta), 0 0 20px var(--magenta-glow), 0 0 40px var(--purple);
-  animation: pulso 1s infinite alternate;
+  text-shadow: 0 0 10px #ff3300, 0 0 20px #ff0000, 0 0 40px #ff6600;
+  animation: latido 1s infinite alternate;
 }
 
-.subtexto-neon {
-  font-size: 1.5rem;
-  color: var(--cyan);
-  text-shadow: 0 0 10px var(--cyan);
+.subtexto-fuego {
+  font-size: 1.6rem;
+  color: #ffcc00;
+  text-shadow: 0 0 10px #ff6600;
   margin-top: 10px;
 }
 
-@keyframes pulso {
-  0% { transform: scale(0.98); }
-  100% { transform: scale(1.05); }
+@keyframes latido {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
 }
