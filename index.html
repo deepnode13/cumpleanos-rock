@@ -1,113 +1,134 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alles Gute zum 16. Geburtstag!</title>
+  <title>Happy Birthday Rock Run</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Librería Canvas Confetti desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-  <!-- Pantalla de Inicio -->
+  <!-- Pantalla de Inicio / Play -->
   <div id="pantalla-inicio" class="pantalla-inicio">
-    <div class="contenido-bienvenida">
-      <div class="icono-carrera">🏃‍♀️</div>
-      <h1>BEREIT FÜR DEN LAUF!</h1>
-      <p>Presiona el botón para iniciar la carrera</p>
-      <button id="btn-iniciar" class="btn-inicio">START!</button>
+    <div class="tarjeta-bienvenida">
+      <span class="icono-rock">🎸⚡</span>
+      <h1>ROCK & RUN BIRTHDAY</h1>
+      <p>Presiona para iniciar la carrera</p>
+      <button id="btn-iniciar" class="btn-rock">¡START ROCKING! 🤘</button>
     </div>
   </div>
 
-  <!-- Escenario Deportivo -->
-  <div class="estadio">
-    
-    <!-- Gradas (Tribunas) -->
+  <!-- Contenedor Principal del Escenario / Estadio -->
+  <div class="estadio-contenedor">
+
+    <!-- Efectos de Luces y Fuego de Concierto -->
+    <div id="luces-escenario" class="luces-escenario">
+      <div class="luz luz-izq"></div>
+      <div class="luz luz-der"></div>
+      <div class="luz luz-centro"></div>
+    </div>
+
+    <div id="fuego-escenario" class="fuego-escenario oculto">
+      <div class="flama f1">🔥</div>
+      <div class="flama f2">🔥</div>
+      <div class="flama f3">🔥</div>
+      <div class="flama f4">🔥</div>
+      <div class="flama f5">🔥</div>
+    </div>
+
+    <!-- Gradas y Público Rockero -->
     <div class="gradas-contenedor">
       <div class="reflectores">
         <div class="foco f-izq"></div>
         <div class="foco f-der"></div>
       </div>
 
-      <!-- Cartel de felicitación durante el recorrido -->
-      <div id="cartel-gradas" class="cartel-gradas oculto">
-        <h2>¡ALLES GUTE ZUM GEBURTSTAG ANNETTE!</h2>
+      <!-- Cartel de Felicitación durante la carrera (Alemán) -->
+      <div id="cartel-gradas" class="cartel-gradas">
+        <h2>ALLES GUTE ZUM GEBURTSTAG ANNETTE! 🤘</h2>
         <p>🏃‍♀️ Lauf weiter! 🏃‍♀️</p>
       </div>
 
-      <!-- Siluetas de Espectadores (Sin emojis) -->
-      <div class="publico-siluetas">
-        <div class="silueta s1"></div>
-        <div class="silueta s2"></div>
-        <div class="silueta s3"></div>
-        <div class="silueta s4"></div>
-        <div class="silueta s5"></div>
-        <div class="silueta s6"></div>
-        <div class="silueta s7"></div>
-        <div class="silueta s8"></div>
+      <!-- Público Rockero -->
+      <div class="tribuna">
+        <div class="publico-rock">
+          <span class="rocker r1">👨‍🎤</span>
+          <span class="rocker r2">🤘</span>
+          <span class="rocker r3">🎸</span>
+          <span class="rocker r4">👩‍🎤</span>
+          <span class="rocker r5">🔥</span>
+          <span class="rocker r6">⚡</span>
+          <span class="rocker r7">🤘</span>
+          <span class="rocker r8">🎤</span>
+          <span class="rocker r1">👩‍🎤</span>
+          <span class="rocker r3">🤘</span>
+          <span class="rocker r5">🎸</span>
+          <span class="rocker r2">👨‍🎤</span>
+        </div>
       </div>
     </div>
 
     <!-- Pista de Atletismo -->
     <div id="pista" class="pista">
-      <div class="linea c1"></div>
-      <div class="linea c2"></div>
-      <div class="linea c3"></div>
-      <div class="numero-carril">16</div>
+      <div class="linea-carril c1"></div>
+      <div class="linea-carril c2"></div>
 
-      <!-- Arco de Meta -->
-      <div id="meta" class="meta oculto">
-        <div class="cinta-meta">ZIEL</div>
-        <div class="poste poste-izq"></div>
-        <div class="poste poste-der"></div>
-      </div>
-
-      <!-- Corredora SVG con escala proporcional -->
-      <div id="corredora" class="corredora-wrapper">
-        <svg viewBox="0 0 100 120" preserveAspectRatio="xMidYMid meet" class="corredora-svg">
-          <!-- Sombra -->
-          <ellipse cx="50" cy="115" rx="20" ry="4" fill="rgba(0,0,0,0.3)" />
-          <!-- Coleta -->
-          <path class="pelo" d="M 45 25 Q 28 20 22 35" stroke="#4a2e16" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Corredora -->
+      <div id="corredora" class="corredora">
+        <svg viewBox="0 0 100 120" class="svg-corredora">
+          <!-- Cabello largo rockero -->
+          <path d="M 35 25 Q 20 40 30 75" stroke="#e6005c" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path d="M 65 25 Q 80 40 70 75" stroke="#e6005c" stroke-width="8" fill="none" stroke-linecap="round"/>
           <!-- Cabeza -->
-          <circle cx="50" cy="22" r="10" fill="#ffdbac" stroke="#333" stroke-width="2"/>
-          <!-- Top -->
-          <path d="M 42 32 L 58 32 L 55 58 L 45 58 Z" fill="#ff3366" stroke="#333" stroke-width="2"/>
-          <!-- Shorts -->
-          <path d="M 44 58 L 56 58 L 58 70 L 42 70 Z" fill="#222" stroke="#333" stroke-width="2"/>
+          <circle cx="50" cy="25" r="14" fill="#f1c27d"/>
+          <ellipse cx="50" cy="18" rx="15" ry="6" fill="#111"/> <!-- Cinta rockera -->
+          <!-- Torso / Playera Rock -->
+          <path d="M 40 39 L 60 39 L 57 75 L 43 75 Z" fill="#111"/>
+          <!-- Detalle de relámpago en playera -->
+          <path d="M 52 45 L 46 57 L 51 57 L 47 69 L 55 54 L 50 54 Z" fill="#ffcc00"/>
           <!-- Brazos -->
           <g class="brazo-izq">
-            <line x1="45" y1="36" x2="30" y2="50" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
-            <line x1="30" y1="50" x2="20" y2="40" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
+            <path d="M 40 42 L 25 58 L 15 50" stroke="#f1c27d" stroke-width="6" fill="none" stroke-linecap="round"/>
           </g>
           <g class="brazo-der">
-            <line x1="55" y1="36" x2="70" y2="48" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
-            <line x1="70" y1="48" x2="80" y2="60" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
+            <path d="M 60 42 L 75 58 L 85 50" stroke="#f1c27d" stroke-width="6" fill="none" stroke-linecap="round"/>
           </g>
-          <!-- Piernas -->
+          <!-- Piernas animadas -->
           <g class="pierna-izq">
-            <line x1="46" y1="70" x2="35" y2="90" stroke="#ffdbac" stroke-width="6" stroke-linecap="round"/>
-            <line x1="35" y1="90" x2="25" y2="110" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
-            <ellipse cx="22" cy="110" rx="6" ry="3" fill="#fff" />
+            <path d="M 45 75 L 30 95 L 40 115" stroke="#111" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <ellipse cx="42" cy="115" rx="7" ry="4" fill="#ff0055"/> <!-- Tenis -->
           </g>
           <g class="pierna-der">
-            <line x1="54" y1="70" x2="65" y2="88" stroke="#ffdbac" stroke-width="6" stroke-linecap="round"/>
-            <line x1="65" y1="88" x2="75" y2="108" stroke="#ffdbac" stroke-width="5" stroke-linecap="round"/>
-            <ellipse cx="78" cy="108" rx="6" ry="3" fill="#fff" />
+            <path d="M 55 75 L 70 95 L 60 115" stroke="#111" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <ellipse cx="62" cy="115" rx="7" ry="4" fill="#ff0055"/> <!-- Tenis -->
           </g>
         </svg>
       </div>
 
-    </div>
-
-    <!-- Mensaje Final al cruzar la meta -->
-    <div id="mensaje-final" class="mensaje-final oculto">
-      <h1>ALLES GUTE ZUM 16. GEBURTSTAG!</h1>
-      <p>🏆 Du hast das Ziel erreicht! 🏆</p>
+      <!-- Meta (Arco de llegada) -->
+      <div id="meta" class="meta oculto">
+        <div class="poster-meta">FINISH</div>
+        <div class="cinta-meta"></div>
+      </div>
     </div>
 
   </div>
 
+  <!-- Cartel Emergente Final (Alemán - Felices 16 años) -->
+  <div id="mensaje-final" class="modal-final oculto">
+    <div class="contenido-modal">
+      <div class="icono-corona">👑🎸</div>
+      <h2>HERZLICHEN GLÜCKWUNSCH ZUM 16. GEBURTSTAG!</h2>
+      <p>¡Has alcanzado la meta como toda una leyenda del Rock!</p>
+      <div class="fuegos-emojis">🔥⚡🎉🎸💥</div>
+    </div>
+  </div>
+
+  <!-- Reproductor de Audio -->
   <audio id="musica" src="audio/happyrock.mp3" preload="auto"></audio>
+
   <script src="script.js"></script>
 </body>
 </html>
