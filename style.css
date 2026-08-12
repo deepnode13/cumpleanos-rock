@@ -4,61 +4,71 @@
   padding: 0;
 }
 
-body, html {
+html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
   font-family: 'Arial Black', sans-serif;
-  background-color: #000;
+  background-color: #0d0d11;
   color: #fff;
 }
 
-/* Pantalla de Inicio */
+/* Pantalla de inicio */
 .pantalla-inicio {
   position: fixed;
   inset: 0;
-  background: #111;
+  background: #11111a;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
   text-align: center;
+  padding: 20px;
 }
 
 .icono-carrera {
-  font-size: 4rem;
-  margin-bottom: 1rem;
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+}
+
+.contenido-bienvenida h1 {
+  font-size: 1.8rem;
+  color: #ff3366;
+}
+
+.contenido-bienvenida p {
+  color: #ccc;
+  margin: 10px 0 20px;
+  font-size: 1rem;
 }
 
 .btn-inicio {
-  padding: 1.2rem 2.5rem;
-  font-size: 1.3rem;
+  padding: 12px 30px;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #fff;
   background: #ff3366;
   border: none;
-  border-radius: 50px;
+  border-radius: 30px;
   cursor: pointer;
-  box-shadow: 0 0 20px #ff3366;
-  margin-top: 1.5rem;
+  box-shadow: 0 0 15px rgba(255, 51, 102, 0.6);
 }
 
-/* Escenario Contenedor */
-.escenario {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
+/* Contenedor Flex para la pantalla completa */
+.estadio {
   display: flex;
   flex-direction: column;
+  width: 100vw;
+  height: 100vh;
 }
 
-/* Gradas en la mitad superior */
-.gradas {
+/* Seccion Gradas (45% alto) */
+.gradas-contenedor {
   position: relative;
   width: 100%;
-  height: 50%;
-  background: linear-gradient(180deg, #1f1f2e 0%, #3a3a52 100%);
-  border-bottom: 8px solid #555;
+  height: 45%;
+  background: linear-gradient(180deg, #1c1d2d 0%, #2a2c42 60%, #1a1a26 100%);
+  border-bottom: 6px solid #444;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -76,64 +86,83 @@ body, html {
 
 .foco {
   position: absolute;
-  top: -20px;
-  width: 200px;
-  height: 300px;
-  background: conic-gradient(from 150deg at 50% 0, rgba(255,255,255,0.2), transparent 60deg);
+  top: 0;
+  width: 30vw;
+  height: 100%;
+  background: conic-gradient(from 150deg at 50% 0, rgba(255,255,255,0.12), transparent 50deg);
 }
-.f1 { left: 10%; }
-.f2 { right: 10%; }
 
-/* Cartel en Gradas */
+.f-izq { left: 10%; }
+.f-der { right: 10%; }
+
+/* Cartel en las gradas */
 .cartel-gradas {
-  margin-top: 20px;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 12px 25px;
-  border-radius: 12px;
+  margin-top: 15px;
+  background: rgba(0, 0, 0, 0.75);
   border: 2px solid #ff3366;
+  border-radius: 10px;
+  padding: 8px 16px;
   text-align: center;
-  box-shadow: 0 0 15px rgba(255, 51, 102, 0.5);
   z-index: 10;
+  max-width: 90%;
+  box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
 }
 
 .cartel-gradas h2 {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: #ff3366;
 }
 
 .cartel-gradas p {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #ffcc00;
+  margin-top: 4px;
 }
 
-/* Espectadores */
-.publico {
+/* Público abstracto (Siluetas CSS sin emojis) */
+.publico-siluetas {
   display: flex;
   justify-content: space-around;
+  align-items: flex-end;
   width: 100%;
-  font-size: 2rem;
-  padding-bottom: 10px;
+  height: 40px;
+  padding: 0 10px;
 }
 
-.p-persona {
-  display: inline-block;
-  animation: saltarPublico 0.6s infinite alternate ease-in-out;
+.silueta {
+  width: 18px;
+  height: 32px;
+  background: #4a4d6b;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  animation: saltoSilueta 0.5s infinite alternate ease-in-out;
 }
 
-.p2, .p5, .p8 { animation-delay: 0.2s; }
-.p3, .p6 { animation-delay: 0.4s; }
+.silueta::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  background: #62668d;
+  border-radius: 50%;
+}
 
-@keyframes saltarPublico {
+.s2, .s5 { animation-delay: 0.15s; }
+.s3, .s7 { animation-delay: 0.3s; }
+
+@keyframes saltoSilueta {
   from { transform: translateY(0); }
-  to { transform: translateY(-12px); }
+  to { transform: translateY(-8px); }
 }
 
-/* Pista en la mitad inferior */
+/* Seccion Pista (55% alto) */
 .pista {
   position: relative;
   width: 100%;
-  height: 50%;
-  background-color: #d34836;
+  height: 55%;
+  background-color: #c84231;
   overflow: hidden;
 }
 
@@ -141,78 +170,83 @@ body, html {
   background-image: repeating-linear-gradient(
     90deg,
     transparent 0px,
-    transparent 80px,
-    rgba(255, 255, 255, 0.2) 80px,
-    rgba(255, 255, 255, 0.2) 90px
+    transparent 70px,
+    rgba(255, 255, 255, 0.2) 70px,
+    rgba(255, 255, 255, 0.2) 80px
   );
-  animation: moverLineaPista 0.3s linear infinite;
+  animation: moverPista 0.3s linear infinite;
 }
 
-@keyframes moverLineaPista {
+@keyframes moverPista {
   from { background-position-x: 0px; }
-  to { background-position-x: -90px; }
+  to { background-position-x: -80px; }
 }
 
 .linea {
   position: absolute;
   width: 100%;
-  height: 4px;
+  height: 3px;
   background: rgba(255, 255, 255, 0.8);
 }
+
 .c1 { top: 25%; }
 .c2 { top: 50%; }
 .c3 { top: 75%; }
 
 .numero-carril {
   position: absolute;
-  left: 20px;
-  top: 35%;
-  font-size: 4rem;
+  left: 15px;
+  top: 30%;
+  font-size: 2.5rem;
   color: rgba(255, 255, 255, 0.3);
 }
 
-/* Corredora */
-.corredora {
+/* Wrapper adaptable para la Corredora */
+.corredora-wrapper {
   position: absolute;
-  bottom: 15%;
+  bottom: 10%;
   left: 5%;
-  width: 110px;
-  height: 130px;
+  width: 18vw;
+  max-width: 110px;
+  min-width: 65px;
+  aspect-ratio: 100 / 120;
   z-index: 20;
 }
 
-.svg-corredora {
+.corredora-svg {
   width: 100%;
   height: 100%;
+  display: block;
 }
 
-.corredora.animar .svg-corredora {
+/* Animación de la corredora */
+.corredora-wrapper.animar .corredora-svg {
   animation: reboteCorredora 0.3s infinite alternate ease-in-out;
 }
 
-.corredora.animar .pierna-izq {
+.corredora-wrapper.animar .pierna-izq {
   animation: moverPierna 0.3s infinite alternate ease-in-out;
   transform-origin: 46px 70px;
 }
 
-.corredora.animar .pierna-der {
+.corredora-wrapper.animar .pierna-der {
   animation: moverPiernaAlt 0.3s infinite alternate ease-in-out;
   transform-origin: 54px 70px;
 }
 
-.corredora.animar .brazo-izq {
+.corredora-wrapper.animar .brazo-izq {
   animation: moverPiernaAlt 0.3s infinite alternate ease-in-out;
   transform-origin: 45px 36px;
 }
 
-.corredora.animar .brazo-der {
+.corredora-wrapper.animar .brazo-der {
   animation: moverPierna 0.3s infinite alternate ease-in-out;
   transform-origin: 55px 36px;
 }
 
 @keyframes reboteCorredora {
   from { transform: translateY(0); }
-  to { transform: translateY(-6px); }
+  to { transform: translateY(-5px); }
 }
 
 @keyframes moverPierna {
@@ -228,70 +262,75 @@ body, html {
 /* Arco de Meta */
 .meta {
   position: absolute;
-  right: 15%;
+  right: 12%;
   top: 0;
-  width: 20px;
+  width: 15px;
   height: 100%;
   z-index: 15;
 }
 
 .poste {
   position: absolute;
-  width: 10px;
+  width: 8px;
   height: 100%;
-  background: repeating-linear-gradient(0deg, #ff0000 0, #ff0000 20px, #ffffff 20px, #ffffff 40px);
+  background: repeating-linear-gradient(0deg, #ff0000 0, #ff0000 15px, #ffffff 15px, #ffffff 30px);
 }
-.poste-izq { left: -10px; }
-.poste-der { right: -10px; }
+
+.poste-izq { left: -8px; }
+.poste-der { right: -8px; }
 
 .cinta-meta {
   position: absolute;
-  top: 30%;
-  left: -60px;
-  width: 140px;
-  height: 30px;
+  top: 25%;
+  left: -45px;
+  width: 100px;
+  height: 26px;
   background: #ff0000;
   color: #fff;
   text-align: center;
-  line-height: 30px;
+  line-height: 26px;
+  font-size: 0.9rem;
   letter-spacing: 2px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* Mensaje Final */
+/* Mensaje Final Modal */
 .mensaje-final {
   position: absolute;
-  top: 35%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.9);
-  padding: 30px;
-  border-radius: 20px;
-  border: 4px solid #ffcc00;
+  background: rgba(10, 10, 15, 0.92);
+  border: 3px solid #ffcc00;
+  border-radius: 15px;
+  padding: 20px;
   text-align: center;
   z-index: 50;
-  box-shadow: 0 0 30px #ffcc00;
+  width: 85%;
+  max-width: 450px;
+  box-shadow: 0 0 25px rgba(255, 204, 0, 0.4);
 }
 
 .mensaje-final h1 {
-  font-size: 2.2rem;
+  font-size: 1.4rem;
   color: #ff3366;
 }
 
 .mensaje-final p {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   color: #ffcc00;
   margin-top: 10px;
 }
 
-/* Clases auxiliares */
 .oculto {
   display: none !important;
 }
 
-@media (max-width: 768px) {
-  .cartel-gradas h2 { font-size: 1.2rem; }
-  .cartel-gradas p { font-size: 0.9rem; }
-  .mensaje-final h1 { font-size: 1.4rem; }
-  .mensaje-final p { font-size: 1rem; }
+/* Ajustes Responsive para Laptops y Pantallas Grandes */
+@media (min-width: 768px) {
+  .cartel-gradas h2 { font-size: 1.8rem; }
+  .cartel-gradas p { font-size: 1.2rem; }
+  .mensaje-final h1 { font-size: 1.8rem; }
+  .mensaje-final p { font-size: 1.3rem; }
+  .numero-carril { font-size: 4rem; }
+  .corredora-wrapper { max-width: 120px; }
 }
