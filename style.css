@@ -9,7 +9,7 @@ body, html {
   height: 100%;
   overflow: hidden;
   font-family: 'Arial Black', sans-serif;
-  background-color: #111;
+  background-color: #000;
   color: #fff;
 }
 
@@ -17,13 +17,12 @@ body, html {
 .pantalla-inicio {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, #2a2a38 0%, #0d0d13 100%);
+  background: #111;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
   text-align: center;
-  padding: 20px;
 }
 
 .icono-carrera {
@@ -31,99 +30,135 @@ body, html {
   margin-bottom: 1rem;
 }
 
-.contenido-bienvenida h1 {
-  font-size: 2.2rem;
-  color: #ff3366;
-  text-shadow: 0 0 15px rgba(255, 51, 102, 0.6);
-}
-
-.contenido-bienvenida p {
-  color: #ddd;
-  margin: 1rem 0 2rem;
-  font-size: 1.1rem;
-}
-
 .btn-inicio {
   padding: 1.2rem 2.5rem;
   font-size: 1.3rem;
   font-weight: bold;
   color: #fff;
-  background: linear-gradient(180deg, #ff3366 0%, #990033 100%);
-  border: 2px solid #ff6699;
+  background: #ff3366;
+  border: none;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(255, 51, 102, 0.8);
-  transition: transform 0.2s ease;
+  box-shadow: 0 0 20px #ff3366;
+  margin-top: 1.5rem;
 }
 
-.btn-inicio:hover {
-  transform: scale(1.05);
-}
-
-/* Escenario Deportivo */
-.escenario-pista {
+/* Escenario Contenedor */
+.escenario {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(180deg, #0a0a14 0%, #1a1a2e 50%, #111 50%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Gradas en la mitad superior */
+.gradas {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(180deg, #1f1f2e 0%, #3a3a52 100%);
+  border-bottom: 8px solid #555;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   overflow: hidden;
 }
 
-.cielo-estadio {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 50%;
-  background: radial-gradient(ellipse at bottom, #1f2847 0%, #090a10 100%);
-}
-
-/* Reflectores */
 .reflectores {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 50%;
+  height: 100%;
   pointer-events: none;
 }
 
-.luz {
+.foco {
   position: absolute;
-  top: -10%;
-  width: 40vw;
-  height: 60vh;
-  opacity: 0.25;
-  filter: blur(20px);
+  top: -20px;
+  width: 200px;
+  height: 300px;
+  background: conic-gradient(from 150deg at 50% 0, rgba(255,255,255,0.2), transparent 60deg);
+}
+.f1 { left: 10%; }
+.f2 { right: 10%; }
+
+/* Cartel en Gradas */
+.cartel-gradas {
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 12px 25px;
+  border-radius: 12px;
+  border: 2px solid #ff3366;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 51, 102, 0.5);
+  z-index: 10;
 }
 
-.luz-1 {
-  left: 5%;
-  background: conic-gradient(from 140deg at 50% 0, #ffffff, transparent 60deg);
+.cartel-gradas h2 {
+  font-size: 1.8rem;
+  color: #ff3366;
 }
 
-.luz-2 {
-  right: 5%;
-  background: conic-gradient(from 160deg at 50% 0, #ffffff, transparent 60deg);
+.cartel-gradas p {
+  font-size: 1.2rem;
+  color: #ffcc00;
 }
 
-/* Pista de Atletismo en Perspectiva */
-.pista {
-  position: absolute;
-  bottom: 0;
+/* Espectadores */
+.publico {
+  display: flex;
+  justify-content: space-around;
   width: 100%;
-  height: 55%;
-  background: #d34836;
-  border-top: 6px solid #fff;
-  box-shadow: inset 0 10px 30px rgba(0,0,0,0.5);
+  font-size: 2rem;
+  padding-bottom: 10px;
+}
+
+.p-persona {
+  display: inline-block;
+  animation: saltarPublico 0.6s infinite alternate ease-in-out;
+}
+
+.p2, .p5, .p8 { animation-delay: 0.2s; }
+.p3, .p6 { animation-delay: 0.4s; }
+
+@keyframes saltarPublico {
+  from { transform: translateY(0); }
+  to { transform: translateY(-12px); }
+}
+
+/* Pista en la mitad inferior */
+.pista {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  background-color: #d34836;
   overflow: hidden;
 }
 
-.linea-carril {
+.pista.movimiento {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 80px,
+    rgba(255, 255, 255, 0.2) 80px,
+    rgba(255, 255, 255, 0.2) 90px
+  );
+  animation: moverLineaPista 0.3s linear infinite;
+}
+
+@keyframes moverLineaPista {
+  from { background-position-x: 0px; }
+  to { background-position-x: -90px; }
+}
+
+.linea {
   position: absolute;
   width: 100%;
   height: 4px;
   background: rgba(255, 255, 255, 0.8);
 }
-
 .c1 { top: 25%; }
 .c2 { top: 50%; }
 .c3 { top: 75%; }
@@ -131,201 +166,132 @@ body, html {
 .numero-carril {
   position: absolute;
   left: 20px;
-  top: 55%;
-  font-size: 3rem;
-  color: rgba(255, 255, 255, 0.4);
+  top: 35%;
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.3);
 }
 
-/* Movimiento del Suelo cuando Corre */
-.pista.corriendo {
-  background-image: repeating-linear-gradient(
-    90deg,
-    transparent 0px,
-    transparent 80px,
-    rgba(255, 255, 255, 0.15) 80px,
-    rgba(255, 255, 255, 0.15) 90px
-  );
-  animation: moverPista 0.4s linear infinite;
-}
-
-@keyframes moverPista {
-  from { background-position-x: 0px; }
-  to { background-position-x: -90px; }
-}
-
-/* Asegurar visibilidad de la corredora durante la carrera */
-.corredora-contenedor {
+/* Corredora */
+.corredora {
   position: absolute;
   bottom: 15%;
   left: 5%;
-  width: 120px;
-  height: 140px;
-  z-index: 50;
-  display: block !important;
-  visibility: visible !important;
+  width: 110px;
+  height: 130px;
+  z-index: 20;
 }
 
 .svg-corredora {
   width: 100%;
   height: 100%;
-  display: block;
 }
 
-/* Forzar que las animaciones no se queden congeladas */
-.corredora-contenedor.animar-carrera {
-  animation: rebote-carrera 0.35s infinite alternate ease-in-out;
+.corredora.animar .svg-corredora {
+  animation: reboteCorredora 0.3s infinite alternate ease-in-out;
 }
 
-.pelo-coleta {
-  fill: none;
-  stroke: #4a2e16;
-  stroke-width: 5;
-  stroke-linecap: round;
-  transform-origin: 45px 25px;
-}
-
-/* Animación de Zancadas y Trote */
-.corredora-contenedor.animar-carrera .svg-corredora {
-  animation: rebote-carrera 0.35s infinite alternate ease-in-out;
-}
-
-.corredora-contenedor.animar-carrera .pierna-izq {
-  animation: pierna-mueve-1 0.35s infinite alternate ease-in-out;
+.corredora.animar .pierna-izq {
+  animation: moverPierna 0.3s infinite alternate ease-in-out;
   transform-origin: 46px 70px;
 }
 
-.corredora-contenedor.animar-carrera .pierna-der {
-  animation: pierna-mueve-2 0.35s infinite alternate ease-in-out;
+.corredora.animar .pierna-der {
+  animation: moverPiernaAlt 0.3s infinite alternate ease-in-out;
   transform-origin: 54px 70px;
 }
 
-.corredora-contenedor.animar-carrera .brazo-izq {
-  animation: pierna-mueve-2 0.35s infinite alternate ease-in-out;
+.corredora.animar .brazo-izq {
+  animation: moverPiernaAlt 0.3s infinite alternate ease-in-out;
   transform-origin: 45px 36px;
 }
 
-.corredora-contenedor.animar-carrera .brazo-der {
-  animation: pierna-mueve-1 0.35s infinite alternate ease-in-out;
+.corredora.animar .brazo-der {
+  animation: moverPierna 0.3s infinite alternate ease-in-out;
   transform-origin: 55px 36px;
 }
 
-.corredora-contenedor.animar-carrera .pelo-coleta {
-  animation: coleta-bounce 0.35s infinite alternate ease-in-out;
+@keyframes reboteCorredora {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
 }
 
-@keyframes rebote-carrera {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-8px); }
+@keyframes moverPierna {
+  from { transform: rotate(-30deg); }
+  to { transform: rotate(30deg); }
 }
 
-@keyframes pierna-mueve-1 {
-  0% { transform: rotate(-35deg); }
-  100% { transform: rotate(35deg); }
+@keyframes moverPiernaAlt {
+  from { transform: rotate(30deg); }
+  to { transform: rotate(-30deg); }
 }
 
-@keyframes pierna-mueve-2 {
-  0% { transform: rotate(35deg); }
-  100% { transform: rotate(-35deg); }
-}
-
-@keyframes coleta-bounce {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(-15deg); }
-}
-
-/* Meta de Llegada */
-.meta-contenedor {
+/* Arco de Meta */
+.meta {
   position: absolute;
-  right: 12%;
-  bottom: 0;
+  right: 15%;
+  top: 0;
   width: 20px;
   height: 100%;
-  z-index: 5;
-  transition: opacity 1s ease;
+  z-index: 15;
 }
 
 .poste {
   position: absolute;
-  width: 12px;
+  width: 10px;
   height: 100%;
-  background: repeating-linear-gradient(0deg, #ff0000 0px, #ff0000 20px, #ffffff 20px, #ffffff 40px);
+  background: repeating-linear-gradient(0deg, #ff0000 0, #ff0000 20px, #ffffff 20px, #ffffff 40px);
 }
-
 .poste-izq { left: -10px; }
 .poste-der { right: -10px; }
 
 .cinta-meta {
   position: absolute;
-  top: 35%;
-  left: -80px;
-  width: 180px;
-  height: 35px;
+  top: 30%;
+  left: -60px;
+  width: 140px;
+  height: 30px;
   background: #ff0000;
   color: #fff;
   text-align: center;
-  line-height: 35px;
-  font-size: 1.2rem;
-  letter-spacing: 3px;
+  line-height: 30px;
+  letter-spacing: 2px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 /* Mensaje Final */
-.mensaje-contenedor {
+.mensaje-final {
   position: absolute;
-  top: 8%;
-  width: 100%;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 30px;
+  border-radius: 20px;
+  border: 4px solid #ffcc00;
   text-align: center;
-  z-index: 20;
-  padding: 0 15px;
-  transition: opacity 1s ease;
+  z-index: 50;
+  box-shadow: 0 0 30px #ffcc00;
 }
 
-.texto-cumple {
-  font-size: 2.5rem;
-  color: #fff;
-  text-shadow: 0 0 10px #ff3366, 0 0 20px #ff0055, 0 0 30px #ff0055;
-  animation: pulso 1s infinite alternate;
+.mensaje-final h1 {
+  font-size: 2.2rem;
+  color: #ff3366;
 }
 
-.subtexto-meta {
+.mensaje-final p {
   font-size: 1.4rem;
   color: #ffcc00;
   margin-top: 10px;
-  text-shadow: 0 0 10px #ff9900;
 }
 
-@keyframes pulso {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
-}
-
-/* Clases de utilidad */
+/* Clases auxiliares */
 .oculto {
-  opacity: 0;
-  pointer-events: none;
+  display: none !important;
 }
 
-/* Responsive para Móviles */
 @media (max-width: 768px) {
-  .corredora-contenedor {
-    width: 100px;
-    height: 120px;
-    bottom: 10%;
-  }
-
-  .texto-cumple {
-    font-size: 1.5rem;
-  }
-
-  .subtexto-meta {
-    font-size: 1rem;
-  }
-
-  .cinta-meta {
-    width: 120px;
-    left: -50px;
-    font-size: 0.9rem;
-    height: 28px;
-    line-height: 28px;
-  }
+  .cartel-gradas h2 { font-size: 1.2rem; }
+  .cartel-gradas p { font-size: 0.9rem; }
+  .mensaje-final h1 { font-size: 1.4rem; }
+  .mensaje-final p { font-size: 1rem; }
 }
