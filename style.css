@@ -153,20 +153,27 @@ body, html {
   to { background-position-x: -90px; }
 }
 
-/* Corredora */
+/* Asegurar visibilidad de la corredora durante la carrera */
 .corredora-contenedor {
   position: absolute;
-  bottom: 12%;
-  left: -120px;
-  width: 140px;
-  height: 160px;
-  z-index: 10;
-  transition: left 0.1s linear;
+  bottom: 15%;
+  left: 5%;
+  width: 120px;
+  height: 140px;
+  z-index: 50;
+  display: block !important;
+  visibility: visible !important;
 }
 
 .svg-corredora {
   width: 100%;
   height: 100%;
+  display: block;
+}
+
+/* Forzar que las animaciones no se queden congeladas */
+.corredora-contenedor.animar-carrera {
+  animation: rebote-carrera 0.35s infinite alternate ease-in-out;
 }
 
 .pelo-coleta {
